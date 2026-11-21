@@ -1,9 +1,10 @@
 export type PathologyEntry = {
   title: string;
-  section: "Breast" | "Bone & Soft Tissue" | "Female Genital";
+  section: string;
   href: string;
   keywords: string;
   group: string;
+  aliases?: string;
 };
 
 export const pathologyIndex: PathologyEntry[] = [
@@ -287,20 +288,95 @@ export const pathologyIndex: PathologyEntry[] = [
   },
 ];
 
+function normalize(value: string): string {
+  return value
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9+.-]+/g, " ")
+    .trim();
+}
+
+function editDistanceAtMostOne(a: string, b: string): boolean {
+  if (a === b) return true;
+  if (Math.abs(a.length - b.length) > 1 || Math.min(a.length, b.length) < 5)
+    return false;
+  let i = 0;
+  let j = 0;
+  let edits = 0;
+  while (i < a.length && j < b.length) {
+    if (a[i] === b[j]) {
+      i++;
+      j++;
+      continue;
+    }
+    edits++;
+    if (edits > 1) return false;
+    if (a.length > b.length) i++;
+    else if (b.length > a.length) j++;
+    else {
+      i++;
+      j++;
+    }
+  }
+  if (i < a.length || j < b.length) edits++;
+  return edits <= 1;
+}
+
+function tokenMatches(queryToken: string, candidateTokens: string[]): boolean {
+  return candidateTokens.some((candidate) => {
+    if (candidate.includes(queryToken) || queryToken.includes(candidate))
+      return true;
+    return editDistanceAtMostOne(queryToken, candidate);
+  });
+}
+
+/**
+ * Case-insensitive, multi-term search. Every query term must match somewhere
+ * in the entry; title and aliases receive stronger ranking than keywords.
+ */
 export function searchPathology(query: string, limit = 12) {
-  const terms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
+  const normalizedQuery = normalize(query);
+  const terms = normalizedQuery.split(/\s+/).filter(Boolean);
   if (!terms.length) return [];
+
   return pathologyIndex
     .map((entry) => {
-      const haystack =
-        `${entry.title} ${entry.section} ${entry.group} ${entry.keywords} ${entry.href}`.toLowerCase();
-      const score = terms.reduce(
-        (sum, term) => sum + (haystack.includes(term) ? 1 : 0),
-        0,
-      );
-      return { ...entry, score };
+      const title = normalize(entry.title);
+      const aliases = normalize(entry.aliases ?? "");
+      const section = normalize(entry.section);
+      const group = normalize(entry.group);
+      const keywords = normalize(entry.keywords);
+      const href = normalize(entry.href.replace(/[/-]+/g, " "));
+      const titleTokens = title.split(/\s+/).filter(Boolean);
+      const aliasTokens = aliases.split(/\s+/).filter(Boolean);
+      const otherTokens = `${section} ${group} ${keywords} ${href}`
+        .split(/\s+/)
+        .filter(Boolean);
+
+      let score = 0;
+      let matched = 0;
+      for (const term of terms) {
+        if (title.includes(term)) {
+          score += 12;
+          matched++;
+        } else if (aliasTokens.some((token) => tokenMatches(term, [token]))) {
+          score += 10;
+          matched++;
+        } else if (titleTokens.some((token) => tokenMatches(term, [token]))) {
+          score += 8;
+          matched++;
+        } else if (otherTokens.some((token) => tokenMatches(term, [token]))) {
+          score += 3;
+          matched++;
+        }
+      }
+      if (matched === terms.length && title === normalizedQuery) score += 30;
+      else if (matched === terms.length && title.startsWith(normalizedQuery))
+        score += 12;
+      return { ...entry, score, matchedTerms: matched };
     })
-    .filter((entry) => entry.score === terms.length)
+    .filter((entry) => entry.matchedTerms === terms.length)
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title))
     .slice(0, limit);
 }
