@@ -1,18 +1,63 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { searchPathology } from "../../lib/pathology-index";
 
 type Props = { compact?: boolean };
+type SearchResult = {
+  title: string;
+  section: string;
+  group: string;
+  href: string;
+  snippet: string;
+  matchType: "diagnosis" | "page";
+};
 
 export default function PathologySearch({ compact = false }: Props) {
   const [query, setQuery] = useState("");
+  const [results, setResults] = useState<SearchResult[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [searched, setSearched] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
-  const results = useMemo(() => searchPathology(query, 10), [query]);
   const hasQuery = query.trim().length > 0;
+
+  useEffect(() => {
+    if (query.trim().length < 2) {
+      setResults([]);
+      setLoading(false);
+      setSearched(false);
+      return;
+    }
+
+    const controller = new AbortController();
+    const timer = window.setTimeout(async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(
+          `/api/search?q=${encodeURIComponent(query.trim())}`,
+          { signal: controller.signal },
+        );
+        if (!response.ok) throw new Error("Search request failed");
+        const data = (await response.json()) as { results?: SearchResult[] };
+        setResults(data.results ?? []);
+        setSearched(true);
+      } catch (error) {
+        if (!(error instanceof DOMException && error.name === "AbortError")) {
+          setResults([]);
+          setSearched(true);
+        }
+      } finally {
+        if (!controller.signal.aborted) setLoading(false);
+      }
+    }, 180);
+
+    return () => {
+      window.clearTimeout(timer);
+      controller.abort();
+    };
+  }, [query]);
 
   useEffect(() => {
     function handlePointerDown(event: MouseEvent) {
@@ -30,7 +75,7 @@ export default function PathologySearch({ compact = false }: Props) {
     };
   }, []);
 
-  useEffect(() => setActiveIndex(0), [query]);
+  useEffect(() => setActiveIndex(0), [query, results.length]);
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (!hasQuery || !results.length) return;
@@ -47,8 +92,7 @@ export default function PathologySearch({ compact = false }: Props) {
     } else if (event.key === "Enter") {
       event.preventDefault();
       const target = results[activeIndex];
-      if (target && typeof window !== "undefined")
-        window.location.href = target.href;
+      if (target) window.location.href = target.href;
     }
   }
 
@@ -87,12 +131,19 @@ export default function PathologySearch({ compact = false }: Props) {
           aria-expanded={open && hasQuery}
           className={`min-w-0 flex-1 bg-transparent text-slate-900 outline-none placeholder:text-slate-400 ${compact ? "text-sm" : "text-base md:text-lg"}`}
         />
+        {loading && (
+          <span className="text-xs text-slate-400" aria-live="polite">
+            Searching…
+          </span>
+        )}
         {hasQuery && (
           <button
             type="button"
             onClick={() => {
               setQuery("");
+              setResults([]);
               setOpen(false);
+              setSearched(false);
             }}
             aria-label="Clear search"
             className="rounded-full px-2 py-1 text-lg leading-none text-slate-400 hover:bg-slate-100 hover:text-slate-700"
@@ -106,17 +157,18 @@ export default function PathologySearch({ compact = false }: Props) {
         <div
           id="pathology-search-results"
           role="listbox"
-          className="absolute z-50 mt-2 max-h-[70vh] w-full overflow-y-auto rounded-2xl border border-slate-200 bg-white p-2 shadow-2xl shadow-slate-950/15"
+          className="absolute z-50 mt-2 max-h-[70vh] w-full overflow-y-auto rounded-2xl border border-slate-200 bg-white p-2 text-left shadow-2xl shadow-slate-950/15"
         >
-          {results.length ? (
+          {loading && !searched ? (
+            <p className="px-4 py-5 text-sm text-slate-500">Searching the pathology library…</p>
+          ) : results.length ? (
             <>
               <div className="px-3 pb-2 pt-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-                {results.length} matching{" "}
-                {results.length === 1 ? "topic" : "topics"} · use ↑ ↓ and Enter
+                {results.length} relevant {results.length === 1 ? "result" : "results"} · use ↑ ↓ and Enter
               </div>
               {results.map((item, index) => (
                 <Link
-                  key={item.href}
+                  key={`${item.href}:${item.title}`}
                   href={item.href}
                   role="option"
                   aria-selected={index === activeIndex}
@@ -132,21 +184,26 @@ export default function PathologySearch({ compact = false }: Props) {
                   </span>
                   <span className="mt-1 block text-xs text-slate-500">
                     {item.section} · {item.group}
+                    {item.matchType === "diagnosis" ? " · diagnosis" : ""}
                   </span>
+                  {item.snippet && (
+                    <span className="mt-1 block text-xs leading-5 text-slate-500">
+                      {item.snippet}
+                    </span>
+                  )}
                 </Link>
               ))}
             </>
-          ) : (
+          ) : searched ? (
             <div className="px-4 py-5">
               <p className="text-sm font-semibold text-slate-700">
                 No matching topic found
               </p>
               <p className="mt-1 text-xs leading-5 text-slate-500">
-                Try a shorter term, a common abbreviation, a gene symbol, or an
-                alternative spelling.
+                Try a shorter term, a common abbreviation, a gene symbol, or an alternative spelling.
               </p>
             </div>
-          )}
+          ) : null}
         </div>
       )}
     </div>

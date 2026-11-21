@@ -299,8 +299,7 @@ function normalize(value: string): string {
 
 function editDistanceAtMostOne(a: string, b: string): boolean {
   if (a === b) return true;
-  if (Math.abs(a.length - b.length) > 1 || Math.min(a.length, b.length) < 5)
-    return false;
+  if (Math.abs(a.length - b.length) > 1 || Math.min(a.length, b.length) < 5) return false;
   let i = 0;
   let j = 0;
   let edits = 0;
@@ -314,10 +313,7 @@ function editDistanceAtMostOne(a: string, b: string): boolean {
     if (edits > 1) return false;
     if (a.length > b.length) i++;
     else if (b.length > a.length) j++;
-    else {
-      i++;
-      j++;
-    }
+    else { i++; j++; }
   }
   if (i < a.length || j < b.length) edits++;
   return edits <= 1;
@@ -325,8 +321,7 @@ function editDistanceAtMostOne(a: string, b: string): boolean {
 
 function tokenMatches(queryToken: string, candidateTokens: string[]): boolean {
   return candidateTokens.some((candidate) => {
-    if (candidate.includes(queryToken) || queryToken.includes(candidate))
-      return true;
+    if (candidate.includes(queryToken) || queryToken.includes(candidate)) return true;
     return editDistanceAtMostOne(queryToken, candidate);
   });
 }
@@ -350,33 +345,22 @@ export function searchPathology(query: string, limit = 12) {
       const href = normalize(entry.href.replace(/[/-]+/g, " "));
       const titleTokens = title.split(/\s+/).filter(Boolean);
       const aliasTokens = aliases.split(/\s+/).filter(Boolean);
-      const otherTokens = `${section} ${group} ${keywords} ${href}`
-        .split(/\s+/)
-        .filter(Boolean);
+      const otherTokens = `${section} ${group} ${keywords} ${href}`.split(/\s+/).filter(Boolean);
 
       let score = 0;
       let matched = 0;
       for (const term of terms) {
-        if (title.includes(term)) {
-          score += 12;
-          matched++;
-        } else if (aliasTokens.some((token) => tokenMatches(term, [token]))) {
-          score += 10;
-          matched++;
-        } else if (titleTokens.some((token) => tokenMatches(term, [token]))) {
-          score += 8;
-          matched++;
-        } else if (otherTokens.some((token) => tokenMatches(term, [token]))) {
-          score += 3;
-          matched++;
-        }
+        if (title.includes(term)) { score += 12; matched++; }
+        else if (aliasTokens.some((token) => tokenMatches(term, [token]))) { score += 10; matched++; }
+        else if (titleTokens.some((token) => tokenMatches(term, [token]))) { score += 8; matched++; }
+        else if (otherTokens.some((token) => tokenMatches(term, [token]))) { score += 3; matched++; }
       }
       if (matched === terms.length && title === normalizedQuery) score += 30;
-      else if (matched === terms.length && title.startsWith(normalizedQuery))
-        score += 12;
+      else if (matched === terms.length && title.startsWith(normalizedQuery)) score += 12;
       return { ...entry, score, matchedTerms: matched };
     })
     .filter((entry) => entry.matchedTerms === terms.length)
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title))
     .slice(0, limit);
 }
+
