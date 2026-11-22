@@ -1,6 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+function slugify(value: string) {
+  return value
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9+.-]+/g, " ")
+    .trim()
+    .replace(/\s+/g, "-")
+    .slice(0, 90);
+}
 
 type Entity = {
   name: string;
@@ -11,6 +22,7 @@ type Entity = {
   molecular: string;
   differential: string;
 };
+
 const entities: Entity[] = [
   {
     name: "Nodular fasciitis",
@@ -758,12 +770,45 @@ function Panel({
     </section>
   );
 }
-function TextBlock({ value }: { value: string }) {
+function HighlightText({ text, query }: { text: string; query: string }) {
+  const terms = query.trim().split(/\s+/).filter(Boolean);
+  if (!terms.length) return <>{text}</>;
+
+  const escapedTerms = terms.map((term) =>
+    term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+  );
+  const pattern = new RegExp(`(${escapedTerms.join("|")})`, "gi");
+  const parts = text.split(pattern);
+
+  return (
+    <>
+      {parts.map((part, index) => {
+        const isMatch = terms.some(
+          (term) => part.toLowerCase() === term.toLowerCase(),
+        );
+        return isMatch ? (
+          <mark
+            key={index}
+            className="rounded-sm bg-yellow-200 px-0.5 text-slate-950"
+          >
+            {part}
+          </mark>
+        ) : (
+          <span key={index}>{part}</span>
+        );
+      })}
+    </>
+  );
+}
+
+function TextBlock({ value, query }: { value: string; query: string }) {
   const items = value.split("\n").filter(Boolean);
   return (
     <ul className="list-disc space-y-1 pl-5 text-sm leading-6 text-slate-700">
       {items.map((item, index) => (
-        <li key={index}>{item.replace(/^•\s*/, "")}</li>
+        <li key={index}>
+          <HighlightText text={item.replace(/^•\s*/, "")} query={query} />
+        </li>
       ))}
     </ul>
   );
@@ -773,6 +818,36 @@ export default function Page() {
   const [query, setQuery] = useState("");
   const [group, setGroup] = useState("All");
   const [expanded, setExpanded] = useState<string[]>([]);
+  const [gpsTarget, setGpsTarget] = useState("");
+  const [gpsQuery, setGpsQuery] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const target = params.get("gpsTarget");
+    const searchQuery = params.get("gpsQuery") ?? "";
+
+    setGpsQuery(searchQuery);
+
+    if (target) {
+      setGpsTarget(target);
+      setExpanded((current) =>
+        current.includes(target) ? current : [...current, target],
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!gpsTarget || !expanded.includes(gpsTarget)) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById(`gps-${slugify(gpsTarget)}`)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [gpsTarget, expanded]);
   const [tab, setTab] = useState<
     "profiles" | "workflow" | "differential" | "ihc"
   >("profiles");
@@ -873,16 +948,19 @@ export default function Page() {
               {filtered.map((e) => (
                 <article
                   key={e.name}
-                  className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
+                  id={`gps-${slugify(e.name)}`}
+                  className="scroll-mt-24 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
                 >
                   <button
                     onClick={() => toggle(e.name)}
                     className="flex w-full items-start justify-between gap-4 px-4 py-4 text-left hover:bg-slate-50"
                   >
                     <div>
-                      <h2 className="font-semibold text-slate-900">{e.name}</h2>
+                      <h2 className="font-semibold text-slate-900">
+                        <HighlightText text={e.name} query={gpsQuery} />
+                      </h2>
                       <p className="mt-1 text-sm text-slate-600">
-                        {e.definition}
+                        <HighlightText text={e.definition} query={gpsQuery} />
                       </p>
                     </div>
                     <span className="mt-1 text-lg text-teal-700">
@@ -892,19 +970,19 @@ export default function Page() {
                   {expanded.includes(e.name) && (
                     <div className="grid gap-3 border-t border-slate-100 bg-slate-50/70 p-4 lg:grid-cols-2">
                       <Panel title="Clinical profile">
-                        <TextBlock value={e.clinical} />
+                        <TextBlock value={e.clinical} query={gpsQuery} />
                       </Panel>
                       <Panel title="Essential diagnostic criteria">
-                        <TextBlock value={e.criteria} />
+                        <TextBlock value={e.criteria} query={gpsQuery} />
                       </Panel>
                       <Panel title="Histopathology and immunophenotype">
-                        <TextBlock value={e.histology} />
+                        <TextBlock value={e.histology} query={gpsQuery} />
                       </Panel>
                       <Panel title="Differential diagnosis">
-                        <TextBlock value={e.differential} />
+                        <TextBlock value={e.differential} query={gpsQuery} />
                       </Panel>
                       <Panel title="Molecular pathology">
-                        <TextBlock value={e.molecular} />
+                        <TextBlock value={e.molecular} query={gpsQuery} />
                       </Panel>
                       <Panel title="Practical diagnostic emphasis">
                         <p>

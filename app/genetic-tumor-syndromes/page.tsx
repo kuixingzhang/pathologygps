@@ -78,28 +78,7 @@ const groups: Group[] = [
 export default function GeneticTumorSyndromesDirectoryPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
-          <Link href="/" className="text-lg font-bold">
-            Pathology GPS
-          </Link>
-          <Link
-            href="/"
-            className="rounded-lg border border-slate-200 px-4 py-2 text-sm hover:bg-slate-50"
-          >
-            Home
-          </Link>
-        </div>
-      </header>
-
       <div className="mx-auto max-w-7xl px-5 py-10 md:px-8">
-        <nav className="mb-5 text-xs text-slate-500" aria-label="Breadcrumb">
-          <Link href="/" className="hover:text-slate-900">
-            Home
-          </Link>{" "}
-          / Genetic Tumor Syndromes
-        </nav>
-
         <div className="max-w-4xl">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-700">
             Hereditary Cancer and Molecular Pathology

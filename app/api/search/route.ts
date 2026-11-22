@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import searchPages from "../../../lib/pathology-search-index.json";
 
+type EntityRecord = {
+  name: string;
+  content: string;
+};
+
 type SearchPage = {
   id: number;
   title: string;
@@ -9,6 +14,17 @@ type SearchPage = {
   href: string;
   content: string;
   entities: string[];
+  entityRecords?: EntityRecord[];
+  aliases?: string[];
+};
+
+type SearchResult = {
+  title: string;
+  section: string;
+  group: string;
+  href: string;
+  snippet: string;
+  matchType: "entity" | "diagnosis" | "page";
 };
 
 const pages = searchPages as SearchPage[];
@@ -24,7 +40,7 @@ function normalize(value: string): string {
     .replace(/\s+/g, " ");
 }
 
-function editDistanceAtMostOne(a: string, b: string): boolean {
+function isOneEditAway(a: string, b: string): boolean {
   if (a === b) return true;
   if (Math.abs(a.length - b.length) > 1 || Math.min(a.length, b.length) < 5)
     return false;
@@ -37,7 +53,8 @@ function editDistanceAtMostOne(a: string, b: string): boolean {
       j++;
       continue;
     }
-    if (++edits > 1) return false;
+    edits++;
+    if (edits > 1) return false;
     if (a.length > b.length) i++;
     else if (b.length > a.length) j++;
     else {
@@ -49,126 +66,205 @@ function editDistanceAtMostOne(a: string, b: string): boolean {
   return edits <= 1;
 }
 
-function titleTermScore(term: string, title: string): number {
-  if (title === term) return 35;
-  if (title.startsWith(term)) return 27;
-  if (title.includes(term)) return 23;
-  const tokens = title.split(" ");
-  if (tokens.some((token) => editDistanceAtMostOne(term, token))) return 17;
-  return 0;
+function phraseScore(query: string, candidate: string): number {
+  if (!query || !candidate) return 0;
+
+  const queryTokens = query.split(" ").filter(Boolean);
+
+  // Multi-word searches are phrase searches: every word must appear
+  // consecutively and in the same order in the candidate.
+  // This allows "papillary carcinoma" to match
+  // "encapsulated papillary carcinoma", but not a candidate containing
+  // only "papillary" or words scattered in unrelated text.
+  if (queryTokens.length > 1) {
+    if (candidate === query) return 1400;
+    return ` ${candidate} `.includes(` ${query} `) ? 1050 : 0;
+  }
+
+  // Preserve broad, forgiving behavior for single-word searches.
+  if (candidate === query) return 1400;
+  if (` ${candidate} `.includes(` ${query} `)) return 1050;
+  if (candidate.startsWith(query)) return 850;
+
+  const candidateTokens = candidate.split(" ").filter(Boolean);
+  const term = queryTokens[0];
+  const found = candidateTokens.find(
+    (token) =>
+      token === term ||
+      (term.length >= 2 && token.startsWith(term)) ||
+      isOneEditAway(term, token),
+  );
+
+  if (!found) return 0;
+  return found === term ? 700 : 560;
 }
 
-function contentTermScore(
-  term: string,
-  normalizedContent: string,
-  contentTokens: Set<string>,
-): number {
-  if (contentTokens.has(term)) {
-    const occurrences = normalizedContent.split(term).length - 1;
-    return 9 + Math.min(occurrences, 12);
+function tokenContentScore(query: string, content: string): number {
+  const terms = query.split(" ").filter(Boolean);
+  if (!terms.length || !content) return 0;
+
+  // For multi-word queries, require the complete contiguous phrase in the
+  // same content. Do not combine isolated occurrences of separate words.
+  if (terms.length > 1) {
+    return ` ${content} `.includes(` ${query} `) ? 64 : 0;
   }
-  if (normalizedContent.includes(term)) {
-    const occurrences = normalizedContent.split(term).length - 1;
-    return 6 + Math.min(occurrences, 12);
+
+  // Single-word searches remain broad and can match a whole word,
+  // a prefix, or a one-character typo.
+  const term = terms[0];
+  const words = [...new Set(content.split(" ").filter(Boolean))];
+  const exact = words.includes(term);
+  if (exact) {
+    const occurrences = content.split(term).length - 1;
+    return 40 + Math.min(occurrences, 14);
   }
-  if (contentTokens.size && term.length >= 5) {
-    for (const token of contentTokens) {
-      if (editDistanceAtMostOne(term, token)) return 2;
-    }
-  }
-  return 0;
+
+  const near = words.some(
+    (word) =>
+      (term.length >= 2 && word.startsWith(term)) || isOneEditAway(term, word),
+  );
+  return near ? 24 : 0;
 }
 
 function makeSnippet(content: string, query: string): string {
-  const lower = content.toLowerCase();
-  const firstTerm = query.trim().split(/\s+/)[0]?.toLowerCase() ?? "";
-  const position = lower.indexOf(firstTerm);
-  if (position < 0) return content.slice(0, 190).trim();
-  const start = Math.max(0, position - 85);
-  return `${start > 0 ? "…" : ""}${content.slice(start, start + 210).trim()}…`;
+  const normalized = normalize(content);
+  const normalizedQuery = normalize(query);
+  let position = normalizedQuery ? normalized.indexOf(normalizedQuery) : -1;
+  if (position < 0) {
+    const firstTerm = normalizedQuery.split(" ")[0] ?? "";
+    position = firstTerm ? normalized.indexOf(firstTerm) : -1;
+  }
+  if (position < 0) return content.slice(0, 210).trim();
+  const start = Math.max(0, position - 90);
+  return `${start > 0 ? "…" : ""}${content.slice(start, start + 230).trim()}…`;
+}
+
+function slugify(value: string): string {
+  return normalize(value).replace(/\s+/g, "-").slice(0, 90);
+}
+
+function makeEntityHref(
+  page: SearchPage,
+  name: string,
+  rawQuery: string,
+): string {
+  const params = new URLSearchParams({
+    gpsTarget: name,
+    gpsQuery: rawQuery,
+  });
+  return `${page.href}?${params.toString()}#gps-${slugify(name)}`;
 }
 
 export async function GET(request: NextRequest) {
-  const query = request.nextUrl.searchParams.get("q") ?? "";
-  const normalizedQuery = normalize(query);
-  const terms = normalizedQuery.split(" ").filter(Boolean);
-  if (!terms.length || normalizedQuery.length < 2) {
-    return NextResponse.json({ results: [] });
-  }
+  const rawQuery = request.nextUrl.searchParams.get("q") ?? "";
+  const query = normalize(rawQuery);
+  if (!query || query.length < 2) return NextResponse.json({ results: [] });
 
-  const results: Array<{
-    title: string;
-    section: string;
-    group: string;
-    href: string;
-    snippet: string;
-    score: number;
-    matchType: "diagnosis" | "page";
-  }> = [];
+  const results: Array<SearchResult & { score: number }> = [];
 
   for (const page of pages) {
-    const content = normalize(page.content);
-    const contentTokens = new Set(content.split(" "));
-    const pageTitle = normalize(page.title);
-    const baseScores = terms.map((term) => {
-      return Math.max(
-        titleTermScore(term, pageTitle),
-        contentTermScore(term, content, contentTokens),
-      );
-    });
+    const normalizedPageContent = normalize(page.content ?? "");
+    const titleScore = phraseScore(query, normalize(page.title));
+    const pageContentScore = tokenContentScore(query, normalizedPageContent);
+    let matchedEntityCount = 0;
 
-    if (baseScores.some((score) => score === 0)) continue;
+    // Search the complete text belonging to each named entity.
+    for (const entity of page.entityRecords ?? []) {
+      const entityName = normalize(entity.name);
+      const entityContent = normalize(entity.content ?? "");
+      const nameScore = phraseScore(query, entityName);
 
-    let bestTitle = page.title;
-    let bestScore = baseScores.reduce((sum, score) => sum + score, 0);
-    let matchType: "diagnosis" | "page" = "page";
-
-    for (const entity of page.entities) {
-      const entityTitle = normalize(entity);
-      let score = 0;
-      let complete = true;
-
-      for (let i = 0; i < terms.length; i++) {
-        const entityScore = titleTermScore(terms[i], entityTitle);
-        const termScore = Math.max(
-          entityScore,
-          baseScores[i] >= 9 ? baseScores[i] : 0,
+      const alias = (page.aliases ?? []).find((item) => {
+        const [aliasText, canonicalEntity] = item.split("::");
+        return (
+          normalize(aliasText) === query &&
+          normalize(canonicalEntity ?? "") === entityName
         );
-        if (!termScore) {
-          complete = false;
-          break;
+      });
+      const aliasScore = alias ? 1320 : 0;
+      const contentScore = tokenContentScore(query, entityContent);
+      const score = Math.max(
+        nameScore,
+        aliasScore,
+        contentScore ? 260 + contentScore : 0,
+      );
+
+      if (score === 0) continue;
+      matchedEntityCount++;
+
+      results.push({
+        title: entity.name,
+        section: page.section,
+        group: page.group,
+        href: makeEntityHref(page, entity.name, rawQuery),
+        snippet:
+          contentScore > 0
+            ? makeSnippet(entity.content, rawQuery)
+            : makeSnippet(entity.name, rawQuery),
+        score: score + (titleScore > 0 ? 8 : 0),
+        matchType: "entity",
+      });
+    }
+
+    // Backward compatibility for older index records without entityRecords.
+    if (!page.entityRecords?.length) {
+      let bestEntity: string | null = null;
+      let bestEntityScore = 0;
+      for (const entity of page.entities ?? []) {
+        const entityScore = phraseScore(query, normalize(entity));
+        const alias = (page.aliases ?? []).find((item) => {
+          const [aliasText, canonicalEntity] = item.split("::");
+          return (
+            normalize(aliasText) === query &&
+            normalize(canonicalEntity ?? "") === normalize(entity)
+          );
+        });
+        const score = Math.max(entityScore, alias ? 1320 : 0);
+        if (score > bestEntityScore) {
+          bestEntity = entity;
+          bestEntityScore = score;
         }
-        score += termScore;
       }
 
-      if (complete && score > bestScore) {
-        bestTitle = entity;
-        bestScore = score;
-        matchType = "diagnosis";
+      if (bestEntity && bestEntityScore >= 560) {
+        matchedEntityCount++;
+        results.push({
+          title: bestEntity,
+          section: page.section,
+          group: page.group,
+          href: makeEntityHref(page, bestEntity, rawQuery),
+          snippet: makeSnippet(page.content, rawQuery),
+          score: bestEntityScore,
+          matchType: "diagnosis",
+        });
       }
     }
 
-    results.push({
-      title: bestTitle,
-      section: page.section,
-      group: page.group,
-      href: page.href,
-      snippet: makeSnippet(page.content, query),
-      score: bestScore,
-      matchType,
-    });
+    // Keep page-level discovery when no entity-specific text matched.
+    if (matchedEntityCount === 0 && pageContentScore > 0) {
+      results.push({
+        title: page.title,
+        section: page.section,
+        group: page.group,
+        href: page.href,
+        snippet: makeSnippet(page.content, rawQuery),
+        score: Math.max(titleScore, pageContentScore),
+        matchType: "page",
+      });
+    }
   }
 
   results.sort(
     (a, b) =>
       b.score - a.score ||
+      (a.matchType === "page" ? 1 : 0) - (b.matchType === "page" ? 1 : 0) ||
       a.title.localeCompare(b.title) ||
       a.href.localeCompare(b.href),
   );
 
   return NextResponse.json(
     {
-      query,
+      query: rawQuery,
       total: results.length,
       results: results.slice(0, 15).map(({ score: _score, ...item }) => item),
     },

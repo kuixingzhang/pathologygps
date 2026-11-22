@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import RouteNavigation from "@/components/RouteNavigation";
+import SearchTargetLocator from "@/components/SearchTargetLocator";
 
 export const metadata: Metadata = {
   title: {
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <RouteNavigation />
+        <SearchTargetLocator />
         {children}
       </body>
     </html>

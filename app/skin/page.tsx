@@ -130,23 +130,6 @@ export default function DermatopathologyPage() {
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
-      <div className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
-          <Link
-            href="/"
-            className="text-xl font-bold tracking-tight text-slate-900"
-          >
-            Pathology GPS
-          </Link>
-          <Link
-            href="/"
-            className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-50"
-          >
-            Home
-          </Link>
-        </div>
-      </div>
-
       <section className="border-b border-slate-200 bg-white">
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-center lg:py-16">
           <div>

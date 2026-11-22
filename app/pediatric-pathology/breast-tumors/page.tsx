@@ -1,6 +1,19 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import SearchHighlight from "@/components/pathology/SearchHighlight";
+
+function slugify(value: string): string {
+  return value
+    .normalize("NFKD")
+    .replace(/[\\u0300-\\u036f]/g, "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9+.-]+/g, " ")
+    .trim()
+    .replace(/\\s+/g, "-")
+    .slice(0, 90);
+}
 
 type Differential = { name: string; distinction: string };
 type Entity = {
@@ -373,6 +386,40 @@ export default function BreastTumorsPage() {
   const [expanded, setExpanded] = useState<string[]>(
     entities.map((e) => e.name),
   );
+
+  const [gpsTarget, setGpsTarget] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const target = params.get("gpsTarget") ?? "";
+
+    if (!target) return;
+
+    setGpsTarget(target);
+    setExpanded((current) =>
+      current.includes(target) ? current : [...current, target],
+    );
+  }, []);
+
+  useEffect(() => {
+    if (!gpsTarget) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      const targetId = `gps-${slugify(gpsTarget)}`;
+      const targetElement =
+        document.getElementById(targetId) ??
+        (window.location.hash
+          ? document.getElementById(window.location.hash.slice(1))
+          : null);
+
+      targetElement?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [gpsTarget, expanded]);
   const filtered = useMemo(
     () =>
       entities.filter((e) => {
@@ -407,224 +454,238 @@ export default function BreastTumorsPage() {
     );
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8 text-slate-800">
-      <header className="mb-8">
-        <p className="text-sm font-semibold uppercase tracking-widest text-sky-700">
-          Pediatric Pathology
-        </p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-950">
-          Breast Tumors
-        </h1>
-        <p className="mt-3 max-w-4xl text-base leading-7 text-slate-600">
-          Diagnostic approach to pediatric and adolescent breast lesions,
-          emphasizing fibroepithelial architecture, benign papillary
-          proliferations, and the recognition of rare primary breast carcinoma.
-        </p>
-      </header>
-
-      <section className="mb-10 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-        <div className="border-b border-slate-200 bg-slate-50 px-5 py-4">
-          <h2 className="text-xl font-semibold text-slate-900">
-            Tumor Classification at a Glance
-          </h2>
-          <p className="mt-1 text-sm text-slate-600">
-            Most pediatric breast masses are benign; architecture and stromal
-            features are central to separating fibroepithelial lesions.
+    <SearchHighlight>
+      <main className="mx-auto max-w-6xl px-4 py-8 text-slate-800">
+        <header className="mb-8">
+          <p className="text-sm font-semibold uppercase tracking-widest text-sky-700">
+            Pediatric Pathology
           </p>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full text-left text-sm">
-            <thead className="bg-white text-xs uppercase tracking-wide text-slate-500">
-              <tr>
-                <th className="px-4 py-3">Entity</th>
-                <th className="px-4 py-3">Category</th>
-                <th className="px-4 py-3">Typical Pattern</th>
-                <th className="px-4 py-3">Key Diagnostic Point</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {overview.map((item) => (
-                <tr key={item.name} className="align-top">
-                  <td className="px-4 py-3 font-semibold text-slate-900">
-                    {item.name}
-                  </td>
-                  <td className="px-4 py-3 text-slate-600">{item.group}</td>
-                  <td className="px-4 py-3 text-slate-600">{item.clue}</td>
-                  <td className="px-4 py-3 text-slate-700">{item.key}</td>
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-950">
+            Breast Tumors
+          </h1>
+          <p className="mt-3 max-w-4xl text-base leading-7 text-slate-600">
+            Diagnostic approach to pediatric and adolescent breast lesions,
+            emphasizing fibroepithelial architecture, benign papillary
+            proliferations, and the recognition of rare primary breast
+            carcinoma.
+          </p>
+        </header>
+
+        <section className="mb-10 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+          <div className="border-b border-slate-200 bg-slate-50 px-5 py-4">
+            <h2 className="text-xl font-semibold text-slate-900">
+              Tumor Classification at a Glance
+            </h2>
+            <p className="mt-1 text-sm text-slate-600">
+              Most pediatric breast masses are benign; architecture and stromal
+              features are central to separating fibroepithelial lesions.
+            </p>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-left text-sm">
+              <thead className="bg-white text-xs uppercase tracking-wide text-slate-500">
+                <tr>
+                  <th className="px-4 py-3">Entity</th>
+                  <th className="px-4 py-3">Category</th>
+                  <th className="px-4 py-3">Typical Pattern</th>
+                  <th className="px-4 py-3">Key Diagnostic Point</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {overview.map((item) => (
+                  <tr key={item.name} className="align-top">
+                    <td className="px-4 py-3 font-semibold text-slate-900">
+                      {item.name}
+                    </td>
+                    <td className="px-4 py-3 text-slate-600">{item.group}</td>
+                    <td className="px-4 py-3 text-slate-600">{item.clue}</td>
+                    <td className="px-4 py-3 text-slate-700">{item.key}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section className="mb-6 rounded-xl border border-sky-100 bg-sky-50/60 p-5">
+          <h2 className="text-lg font-semibold text-slate-900">
+            Practical Diagnostic Framework
+          </h2>
+          <ol className="mt-3 grid gap-3 text-sm leading-6 text-slate-700 md:grid-cols-2">
+            <li>
+              <strong>
+                1. Start with the clinical and radiologic context.
+              </strong>{" "}
+              Ultrasound is generally preferred in children and adolescents;
+              correlate the mass with age, pubertal status, and imaging.
+            </li>
+            <li>
+              <strong>2. For a biphasic lesion, assess architecture.</strong>{" "}
+              Separate conventional and juvenile fibroadenoma from phyllodes
+              tumor by looking for well-developed leaf-like fronds, stromal
+              overgrowth, atypia, and mitotic activity.
+            </li>
+            <li>
+              <strong>
+                3. For papillary/cystic lesions, assess distribution.
+              </strong>{" "}
+              Juvenile papillomatosis is a constellation of multifocal cystic
+              and benign proliferative changes; intraductal papilloma is usually
+              a localized ductal lesion.
+            </li>
+            <li>
+              <strong>
+                4. For a malignant epithelial lesion, confirm primary origin.
+              </strong>{" "}
+              Exclude metastasis or direct extension from an extramammary tumor;
+              secretory morphology and ETV6::NTRK3 support secretory carcinoma.
+            </li>
+          </ol>
+        </section>
+
+        <div className="mb-5 flex flex-col gap-3 sm:flex-row">
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search entities, criteria, markers, or differentials..."
+            className="min-w-0 flex-1 rounded-lg border border-slate-300 px-4 py-2.5 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100"
+          />
+          <select
+            value={group}
+            onChange={(e) => setGroup(e.target.value)}
+            className="rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm"
+          >
+            {groups.map((g) => (
+              <option key={g} value={g}>
+                {g}
+              </option>
+            ))}
+          </select>
+          <button
+            onClick={() =>
+              setExpanded(
+                expanded.length === entities.length
+                  ? []
+                  : entities.map((e) => e.name),
+              )
+            }
+            className="rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-medium hover:bg-slate-50"
+          >
+            {expanded.length === entities.length
+              ? "Collapse all"
+              : "Expand all"}
+          </button>
         </div>
-      </section>
 
-      <section className="mb-6 rounded-xl border border-sky-100 bg-sky-50/60 p-5">
-        <h2 className="text-lg font-semibold text-slate-900">
-          Practical Diagnostic Framework
-        </h2>
-        <ol className="mt-3 grid gap-3 text-sm leading-6 text-slate-700 md:grid-cols-2">
-          <li>
-            <strong>1. Start with the clinical and radiologic context.</strong>{" "}
-            Ultrasound is generally preferred in children and adolescents;
-            correlate the mass with age, pubertal status, and imaging.
-          </li>
-          <li>
-            <strong>2. For a biphasic lesion, assess architecture.</strong>{" "}
-            Separate conventional and juvenile fibroadenoma from phyllodes tumor
-            by looking for well-developed leaf-like fronds, stromal overgrowth,
-            atypia, and mitotic activity.
-          </li>
-          <li>
-            <strong>
-              3. For papillary/cystic lesions, assess distribution.
-            </strong>{" "}
-            Juvenile papillomatosis is a constellation of multifocal cystic and
-            benign proliferative changes; intraductal papilloma is usually a
-            localized ductal lesion.
-          </li>
-          <li>
-            <strong>
-              4. For a malignant epithelial lesion, confirm primary origin.
-            </strong>{" "}
-            Exclude metastasis or direct extension from an extramammary tumor;
-            secretory morphology and ETV6::NTRK3 support secretory carcinoma.
-          </li>
-        </ol>
-      </section>
-
-      <div className="mb-5 flex flex-col gap-3 sm:flex-row">
-        <input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search entities, criteria, markers, or differentials..."
-          className="min-w-0 flex-1 rounded-lg border border-slate-300 px-4 py-2.5 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100"
-        />
-        <select
-          value={group}
-          onChange={(e) => setGroup(e.target.value)}
-          className="rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm"
-        >
-          {groups.map((g) => (
-            <option key={g} value={g}>
-              {g}
-            </option>
-          ))}
-        </select>
-        <button
-          onClick={() =>
-            setExpanded(
-              expanded.length === entities.length
-                ? []
-                : entities.map((e) => e.name),
-            )
-          }
-          className="rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-medium hover:bg-slate-50"
-        >
-          {expanded.length === entities.length ? "Collapse all" : "Expand all"}
-        </button>
-      </div>
-
-      <div className="space-y-4">
-        {filtered.map((entity) => {
-          const isOpen = expanded.includes(entity.name);
-          return (
-            <article
-              key={entity.name}
-              className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
-            >
-              <button
-                onClick={() => toggle(entity.name)}
-                className="flex w-full items-start justify-between gap-4 px-5 py-4 text-left hover:bg-slate-50"
+        <div className="space-y-4">
+          {filtered.map((entity) => {
+            const isOpen = expanded.includes(entity.name);
+            return (
+              <article
+                key={entity.name}
+                id={`gps-${slugify(entity.name)}`}
+                className="scroll-mt-24 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
               >
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-sky-700">
-                    {entity.group}
-                  </p>
-                  <h2 className="mt-1 text-xl font-semibold text-slate-950">
-                    {entity.name}
-                  </h2>
-                  <p className="mt-1 text-sm leading-6 text-slate-600">
-                    {entity.clue}
-                  </p>
-                </div>
-                <span className="mt-1 shrink-0 rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-600">
-                  {isOpen ? "−" : "+"}
-                </span>
-              </button>
-              {isOpen && (
-                <div className="border-t border-slate-100 px-5 py-5">
-                  <p className="mb-5 text-sm leading-6 text-slate-700">
-                    {entity.summary}
-                  </p>
-                  <div className="grid gap-6 lg:grid-cols-2">
-                    <Section title="Clinical Profile" items={entity.clinical} />
-                    <Section
-                      title="Essential Diagnostic Criteria"
-                      items={entity.criteria}
-                    />
-                    <Section title="Histopathology" items={entity.histology} />
-                    <Section
-                      title="Immunohistochemistry and Immunophenotype"
-                      items={entity.ihc}
-                    />
-                    <section>
-                      <h3 className="mb-2 text-base font-semibold text-slate-900">
-                        Differential Diagnosis
-                      </h3>
-                      <div className="space-y-3">
-                        {entity.differential.map((d) => (
-                          <div
-                            key={d.name}
-                            className="rounded-lg border border-amber-100 bg-amber-50/50 p-3"
-                          >
-                            <p className="text-sm font-semibold text-slate-900">
-                              {d.name}
-                            </p>
-                            <p className="mt-1 text-sm leading-6 text-slate-700">
-                              {d.distinction}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </section>
-                    {entity.molecular && (
+                <button
+                  onClick={() => toggle(entity.name)}
+                  className="flex w-full items-start justify-between gap-4 px-5 py-4 text-left hover:bg-slate-50"
+                >
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-sky-700">
+                      {entity.group}
+                    </p>
+                    <h2 className="mt-1 text-xl font-semibold text-slate-950">
+                      {entity.name}
+                    </h2>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">
+                      {entity.clue}
+                    </p>
+                  </div>
+                  <span className="mt-1 shrink-0 rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-600">
+                    {isOpen ? "−" : "+"}
+                  </span>
+                </button>
+                {isOpen && (
+                  <div className="border-t border-slate-100 px-5 py-5">
+                    <p className="mb-5 text-sm leading-6 text-slate-700">
+                      {entity.summary}
+                    </p>
+                    <div className="grid gap-6 lg:grid-cols-2">
                       <Section
-                        title="Molecular Pathology"
-                        items={entity.molecular}
+                        title="Clinical Profile"
+                        items={entity.clinical}
                       />
+                      <Section
+                        title="Essential Diagnostic Criteria"
+                        items={entity.criteria}
+                      />
+                      <Section
+                        title="Histopathology"
+                        items={entity.histology}
+                      />
+                      <Section
+                        title="Immunohistochemistry and Immunophenotype"
+                        items={entity.ihc}
+                      />
+                      <section>
+                        <h3 className="mb-2 text-base font-semibold text-slate-900">
+                          Differential Diagnosis
+                        </h3>
+                        <div className="space-y-3">
+                          {entity.differential.map((d) => (
+                            <div
+                              key={d.name}
+                              className="rounded-lg border border-amber-100 bg-amber-50/50 p-3"
+                            >
+                              <p className="text-sm font-semibold text-slate-900">
+                                {d.name}
+                              </p>
+                              <p className="mt-1 text-sm leading-6 text-slate-700">
+                                {d.distinction}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </section>
+                      {entity.molecular && (
+                        <Section
+                          title="Molecular Pathology"
+                          items={entity.molecular}
+                        />
+                      )}
+                    </div>
+                    {entity.pitfalls && (
+                      <div className="mt-6 rounded-lg border border-rose-100 bg-rose-50/50 p-4">
+                        <h3 className="text-sm font-semibold text-slate-900">
+                          Diagnostic Pitfalls
+                        </h3>
+                        <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-slate-700">
+                          {entity.pitfalls.map((pitfall) => (
+                            <li key={pitfall}>{pitfall}</li>
+                          ))}
+                        </ul>
+                      </div>
                     )}
                   </div>
-                  {entity.pitfalls && (
-                    <div className="mt-6 rounded-lg border border-rose-100 bg-rose-50/50 p-4">
-                      <h3 className="text-sm font-semibold text-slate-900">
-                        Diagnostic Pitfalls
-                      </h3>
-                      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-slate-700">
-                        {entity.pitfalls.map((pitfall) => (
-                          <li key={pitfall}>{pitfall}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              )}
-            </article>
-          );
-        })}
-        {filtered.length === 0 && (
-          <p className="rounded-lg border border-slate-200 bg-slate-50 p-6 text-center text-sm text-slate-600">
-            No matching entities. Try a different search term or category.
-          </p>
-        )}
-      </div>
+                )}
+              </article>
+            );
+          })}
+          {filtered.length === 0 && (
+            <p className="rounded-lg border border-slate-200 bg-slate-50 p-6 text-center text-sm text-slate-600">
+              No matching entities. Try a different search term or category.
+            </p>
+          )}
+        </div>
 
-      <footer className="mt-10 border-t border-slate-200 pt-5 text-xs leading-5 text-slate-500">
-        Pediatric breast masses require clinicoradiologic correlation. Because
-        most lesions are benign, a conservative approach is generally
-        appropriate; suspicious lesions warrant tissue diagnosis and careful
-        exclusion of metastatic or directly extending malignancy.
-      </footer>
-    </main>
+        <footer className="mt-10 border-t border-slate-200 pt-5 text-xs leading-5 text-slate-500">
+          Pediatric breast masses require clinicoradiologic correlation. Because
+          most lesions are benign, a conservative approach is generally
+          appropriate; suspicious lesions warrant tissue diagnosis and careful
+          exclusion of metastatic or directly extending malignancy.
+        </footer>
+      </main>
+    </SearchHighlight>
   );
 }
 

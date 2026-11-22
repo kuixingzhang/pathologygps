@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 type Props = { compact?: boolean };
@@ -10,7 +10,7 @@ type SearchResult = {
   group: string;
   href: string;
   snippet: string;
-  matchType: "diagnosis" | "page";
+  matchType: "entity" | "diagnosis" | "page";
 };
 
 export default function PathologySearch({ compact = false }: Props) {
@@ -22,9 +22,10 @@ export default function PathologySearch({ compact = false }: Props) {
   const [searched, setSearched] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const hasQuery = query.trim().length > 0;
+  const canSearch = query.trim().length >= 2;
 
   useEffect(() => {
-    if (query.trim().length < 2) {
+    if (!canSearch) {
       setResults([]);
       setLoading(false);
       setSearched(false);
@@ -51,13 +52,13 @@ export default function PathologySearch({ compact = false }: Props) {
       } finally {
         if (!controller.signal.aborted) setLoading(false);
       }
-    }, 180);
+    }, 140);
 
     return () => {
       window.clearTimeout(timer);
       controller.abort();
     };
-  }, [query]);
+  }, [query, canSearch]);
 
   useEffect(() => {
     function handlePointerDown(event: MouseEvent) {
@@ -78,7 +79,7 @@ export default function PathologySearch({ compact = false }: Props) {
   useEffect(() => setActiveIndex(0), [query, results.length]);
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-    if (!hasQuery || !results.length) return;
+    if (!results.length) return;
     if (event.key === "ArrowDown") {
       event.preventDefault();
       setOpen(true);
@@ -90,9 +91,11 @@ export default function PathologySearch({ compact = false }: Props) {
         (current) => (current - 1 + results.length) % results.length,
       );
     } else if (event.key === "Enter") {
-      event.preventDefault();
       const target = results[activeIndex];
-      if (target) window.location.href = target.href;
+      if (target) {
+        event.preventDefault();
+        window.location.href = target.href;
+      }
     }
   }
 
@@ -159,12 +162,20 @@ export default function PathologySearch({ compact = false }: Props) {
           role="listbox"
           className="absolute z-50 mt-2 max-h-[70vh] w-full overflow-y-auto rounded-2xl border border-slate-200 bg-white p-2 text-left shadow-2xl shadow-slate-950/15"
         >
-          {loading && !searched ? (
-            <p className="px-4 py-5 text-sm text-slate-500">Searching the pathology library…</p>
+          {!canSearch ? (
+            <p className="px-4 py-4 text-sm text-slate-500">
+              Type at least 2 letters to see matching diagnoses and topics.
+            </p>
+          ) : loading && !searched ? (
+            <p className="px-4 py-5 text-sm text-slate-500">
+              Searching the pathology library…
+            </p>
           ) : results.length ? (
             <>
               <div className="px-3 pb-2 pt-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-                {results.length} relevant {results.length === 1 ? "result" : "results"} · use ↑ ↓ and Enter
+                {results.length} suggested{" "}
+                {results.length === 1 ? "result" : "results"} · use ↑ ↓ and
+                Enter
               </div>
               {results.map((item, index) => (
                 <Link
@@ -184,7 +195,10 @@ export default function PathologySearch({ compact = false }: Props) {
                   </span>
                   <span className="mt-1 block text-xs text-slate-500">
                     {item.section} · {item.group}
-                    {item.matchType === "diagnosis" ? " · diagnosis" : ""}
+                    {item.matchType === "entity" ||
+                    item.matchType === "diagnosis"
+                      ? " · diagnosis"
+                      : " · topic"}
                   </span>
                   {item.snippet && (
                     <span className="mt-1 block text-xs leading-5 text-slate-500">
@@ -200,7 +214,8 @@ export default function PathologySearch({ compact = false }: Props) {
                 No matching topic found
               </p>
               <p className="mt-1 text-xs leading-5 text-slate-500">
-                Try a shorter term, a common abbreviation, a gene symbol, or an alternative spelling.
+                Try a shorter term, abbreviation, gene symbol, or a slightly
+                different spelling.
               </p>
             </div>
           ) : null}
