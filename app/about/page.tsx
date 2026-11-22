@@ -16,15 +16,6 @@ export default function AboutPage() {
             system for pathology.
           </p>
         </div>
-        <Link
-          href="/"
-          className="mt-7 inline-flex items-center rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:border-sky-300 hover:bg-sky-50 hover:text-sky-900"
-        >
-          <span aria-hidden="true" className="mr-2">
-            ←
-          </span>
-          Back to Home
-        </Link>
       </div>
     </main>
   );
