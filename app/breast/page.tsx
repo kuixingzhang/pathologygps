@@ -10,7 +10,6 @@ export default function BreastDirectoryPage() {
         {
           title: "Epithelial Tumors",
           items: [
-            { title: "Adenomas", href: "/breast/epithelial/adenomas" },
             {
               title: "Non-invasive Neoplasia",
               href: "/breast/epithelial/non-invasive-neoplasia",
@@ -19,6 +18,7 @@ export default function BreastDirectoryPage() {
               title: "Papillary Lesions",
               href: "/breast/epithelial/papillary-lesions",
             },
+            { title: "Adenomas", href: "/breast/epithelial/adenomas" },
             {
               title: "Precursor Lesions",
               href: "/breast/epithelial/precursor-lesions",
