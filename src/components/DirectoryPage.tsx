@@ -52,24 +52,16 @@ export default function DirectoryPage({
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="group flex items-center justify-between gap-4 px-5 py-2.5 hover:bg-slate-50"
+                    className="group block px-5 py-2.5 hover:bg-slate-50"
                   >
-                    <span>
-                      <span className="block text-sm font-medium leading-5 text-slate-700 group-hover:text-teal-800">
-                        {item.title}
+                    <span className="block text-sm font-medium leading-5 text-slate-700 group-hover:text-teal-800">
+                      {item.title}
+                    </span>
+                    {item.description && (
+                      <span className="mt-1 block text-xs leading-5 text-slate-500">
+                        {item.description}
                       </span>
-                      {item.description && (
-                        <span className="mt-1 block text-xs leading-5 text-slate-500">
-                          {item.description}
-                        </span>
-                      )}
-                    </span>
-                    <span
-                      aria-hidden="true"
-                      className="shrink-0 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-teal-700"
-                    >
-                      →
-                    </span>
+                    )}
                   </Link>
                 ))}
               </div>

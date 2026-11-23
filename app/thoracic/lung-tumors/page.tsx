@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
 
 type Entity = {
@@ -1843,27 +1842,7 @@ export default function LungTumorsPage() {
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
-          <Link href="/" className="text-lg font-bold tracking-tight">
-            Pathology GPS
-          </Link>
-          <Link
-            href="/thoracic"
-            className="rounded-lg border border-slate-200 px-4 py-2 text-sm hover:bg-slate-50"
-          >
-            Thoracic Pathology
-          </Link>
-        </div>
-      </header>
-
       <div className="mx-auto max-w-7xl px-5 py-8 md:px-8">
-        <nav className="mb-5 text-xs text-slate-500">
-          <Link href="/" className="hover:text-slate-900">
-            Home
-          </Link>{" "}
-          / Lung Tumors
-        </nav>
         <div className="max-w-4xl">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-700">
             Thoracic Pathology

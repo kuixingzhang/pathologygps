@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
 
 type Entity = {
   name: string;
@@ -360,32 +359,7 @@ export default function ConjunctivalTumorsPage() {
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
-          <Link href="/" className="text-lg font-bold tracking-tight">
-            Pathology GPS
-          </Link>
-          <Link
-            href="/head-and-neck"
-            className="rounded-lg border border-slate-200 px-4 py-2 text-sm hover:bg-slate-50"
-          >
-            Head &amp; Neck
-          </Link>
-        </div>
-      </header>
-
       <div className="mx-auto max-w-7xl px-5 py-10 md:px-8">
-        <nav className="mb-5 text-xs text-slate-500">
-          <Link href="/" className="hover:text-slate-900">
-            Home
-          </Link>{" "}
-          /{" "}
-          <Link href="/head-and-neck" className="hover:text-slate-900">
-            Head &amp; Neck
-          </Link>{" "}
-          / Eye &amp; Conjunctiva
-        </nav>
-
         <div className="max-w-4xl">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-700">
             Ocular Surface Pathology

@@ -2,14 +2,14 @@ import Link from "next/link";
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-[#F7F9FC] px-5 py-12 text-[#243B5A] md:px-8 md:py-16">
-      <div className="mx-auto max-w-3xl">
-        <h1 className="mt-3 text-3xl font-bold tracking-tight text-[#172B4D] md:text-4xl">
+    <main className="min-h-screen bg-slate-50 px-5 py-7 text-slate-900 md:px-8 md:py-8">
+      <div className="mx-auto max-w-5xl">
+        <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-800 md:text-4xl">
           About PathologyGPS
         </h1>
 
-        <div className="mt-7 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-9">
-          <div className="space-y-6 text-base leading-8 text-[#425873] md:text-lg">
+        <div className="mt-5 rounded-2xl border border-slate-200 bg-white px-6 py-6 shadow-sm md:px-9 md:py-7">
+          <div className="space-y-4 text-base leading-7 text-slate-700">
             <p>
               Pathologic diagnosis plays a central role in the management of
               tumors. It is more than the recognition of cellular and tissue
@@ -25,7 +25,7 @@ export default function AboutPage() {
             </p>
 
             <p>
-              <strong className="font-semibold text-[#172B4D]">
+              <strong className="font-semibold text-slate-900">
                 PathologyGPS (Pathology Global Positioning System)
               </strong>{" "}
               is envisioned as a diagnostic navigation system built around the
@@ -47,28 +47,18 @@ export default function AboutPage() {
             <p>
               Pathology is a continually evolving field, and diagnostic
               knowledge grows through shared experience and discussion.
-              Feedback, suggestions, and comments are always welcome.
+              Feedback, suggestions, and comments are always welcome. Please
+              contact us at{" "}
+              <Link
+                href="mailto:info@pathologygps.com"
+                className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+              >
+                info@pathologygps.com
+              </Link>
+              .
             </p>
-
-            <div className="border-t border-slate-200 pt-5">
-              <p className="font-medium text-[#172B4D]">Contact</p>
-              <p className="mt-1">
-                Please feel free to contact us at{" "}
-                <Link
-                  href="mailto:info@pathologygps.com"
-                  className="font-semibold text-[#315F91] underline decoration-[#9BAFC8] underline-offset-4 transition hover:text-[#172B4D]"
-                >
-                  info@pathologygps.com
-                </Link>
-                .
-              </p>
-            </div>
           </div>
         </div>
-
-        <p className="mt-8 text-center text-xs text-slate-500">
-          PathologyGPS · Diagnostic Excellence
-        </p>
       </div>
     </main>
   );
