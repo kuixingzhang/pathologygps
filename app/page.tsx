@@ -4,7 +4,6 @@ import PathologySearch from "@/components/PathologySearch";
 const specialties = [
   { title: "Breast", href: "/breast" },
   { title: "Central Nervous System", href: "/cns" },
-  { title: "Dermatopathology", href: "/skin" },
   { title: "Digestive System", href: "/digestive-system" },
   { title: "Endocrine", href: "/endocrine" },
   { title: "Eye and Orbit", href: "/eye-orbit" },
@@ -13,6 +12,7 @@ const specialties = [
   { title: "Head & Neck", href: "/head-and-neck" },
   { title: "Hematopathology", href: "/hematopathology" },
   { title: "Pediatric Pathology", href: "/pediatric-pathology" },
+  { title: "Skin", href: "/skin" },
   { title: "Soft Tissue and Bone", href: "/soft-tissue-and-bone" },
   { title: "Thoracic", href: "/thoracic" },
   { title: "Genetic Tumor Syndromes", href: "/genetic-tumor-syndromes" },
