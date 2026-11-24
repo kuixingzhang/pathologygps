@@ -251,21 +251,6 @@ export default function BreastGeneticsPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-800">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <nav
-          className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500"
-          aria-label="Breadcrumb"
-        >
-          <Link href="/" className="hover:text-teal-700">
-            Home
-          </Link>
-          <span>/</span>
-          <Link href="/breast" className="hover:text-teal-700">
-            Breast
-          </Link>
-          <span>/</span>
-          <span className="text-slate-800">Genetics</span>
-        </nav>
-
         <section className="py-2">
           <h1 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
             Hereditary Breast Cancer Genetics

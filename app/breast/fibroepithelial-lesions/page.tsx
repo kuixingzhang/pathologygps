@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const diagnosticSteps = [
   {
     number: "01",
@@ -177,18 +175,7 @@ export default function BreastFibroepithelialLesionsPage() {
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-7xl px-5 py-5 sm:px-8">
-          <nav className="text-sm text-slate-500">
-            <Link href="/" className="hover:text-blue-700">
-              PathologyGPS
-            </Link>
-            {
-              " / Breast / Mesenchymal & Biphasic Lesions / Fibroepithelial Lesions"
-            }
-          </nav>
           <div className="mt-7 max-w-4xl">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">
-              Breast · Fibroepithelial lesions
-            </p>
             <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
               Breast Fibroepithelial Lesions
             </h1>

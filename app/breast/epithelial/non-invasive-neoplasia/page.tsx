@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const sections = [
   {
     id: "alh",
@@ -225,31 +223,6 @@ function BulletList({ items }: { items: string[] }) {
 export default function NonInvasiveNeoplasiaPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
-      <div className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 py-5 md:px-8">
-          <Link
-            href="/"
-            className="text-sm font-semibold tracking-wide text-slate-800 hover:text-teal-700"
-          >
-            PathologyGPS
-          </Link>
-          <nav className="flex flex-wrap gap-4 text-sm text-slate-600">
-            <Link href="/breast" className="hover:text-teal-700">
-              Breast
-            </Link>
-            <Link href="/breast/adenomas" className="hover:text-teal-700">
-              Adenomas
-            </Link>
-            <Link
-              href="/breast/epithelial-myoepithelial-tumors"
-              className="hover:text-teal-700"
-            >
-              Epithelial-myoepithelial tumors
-            </Link>
-          </nav>
-        </div>
-      </div>
-
       <div className="mx-auto max-w-7xl px-5 py-10 md:px-8 md:py-14">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_260px]">
           <div className="min-w-0 space-y-14">

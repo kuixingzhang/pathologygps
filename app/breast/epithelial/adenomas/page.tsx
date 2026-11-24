@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const rows = [
   [
     "Tubular adenoma",
@@ -97,17 +95,6 @@ export default function BreastAdenomasPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <nav className="mb-6 text-sm text-slate-500" aria-label="Breadcrumb">
-          <Link href="/" className="hover:text-slate-900">
-            PathologyGPS
-          </Link>
-          <span className="mx-2">/</span>
-          <Link href="/breast" className="hover:text-slate-900">
-            Breast
-          </Link>
-          <span className="mx-2">/</span>
-          <span className="text-slate-700">Adenomas</span>
-        </nav>
         <header className="py-4">
           <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
             Breast Adenomas

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import SearchHighlight from "@/components/pathology/SearchHighlight";
 
 function slugify(value: string): string {
@@ -144,12 +143,6 @@ export default function BreastPapillaryLesionsPage() {
       <main className="min-h-screen bg-slate-50 text-slate-900">
         <header className="border-b border-slate-200 bg-white">
           <div className="mx-auto max-w-7xl px-5 py-5 sm:px-8">
-            <nav className="text-sm text-slate-500">
-              <Link href="/" className="hover:text-blue-700">
-                PathologyGPS
-              </Link>
-              {" / Breast / Epithelial Lesions / Papillary Lesions"}
-            </nav>
             <div className="mt-7 max-w-4xl">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">
                 Breast · Epithelial lesions
