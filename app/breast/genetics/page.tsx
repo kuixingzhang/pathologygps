@@ -266,46 +266,10 @@ export default function BreastGeneticsPage() {
           <span className="text-slate-800">Genetics</span>
         </nav>
 
-        <section className="overflow-hidden rounded-3xl bg-slate-950 text-white shadow-sm">
-          <div className="grid gap-8 px-6 py-9 sm:px-10 sm:py-12 lg:grid-cols-[1.5fr_0.8fr] lg:items-end">
-            <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-teal-300">
-                Breast Pathology • Diagnostic Reference
-              </p>
-              <h1 className="max-w-3xl text-3xl font-semibold tracking-tight sm:text-5xl">
-                Hereditary Breast Cancer Genetics
-              </h1>
-              <p className="mt-5 max-w-3xl text-base leading-7 text-slate-300">
-                A concise, pathology-focused guide to inherited breast cancer
-                susceptibility: when to suspect a syndrome, what morphology
-                can—and cannot—tell you, and how to interpret germline findings.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {[
-                  "Germline risk",
-                  "Morphology clues",
-                  "IHC context",
-                  "VUS interpretation",
-                ].map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs text-slate-200"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-              <p className="text-sm font-medium text-teal-200">
-                Core principle
-              </p>
-              <p className="mt-2 text-lg leading-7 text-white">
-                Histology can raise suspicion. Germline testing and clinical
-                context establish hereditary predisposition.
-              </p>
-            </div>
-          </div>
+        <section className="py-2">
+          <h1 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
+            Hereditary Breast Cancer Genetics
+          </h1>
         </section>
 
         <section className="mt-8 grid gap-4 md:grid-cols-3">
@@ -339,27 +303,6 @@ export default function BreastGeneticsPage() {
               <p className="mt-2 text-sm leading-6 text-slate-600">{item.d}</p>
             </div>
           ))}
-        </section>
-
-        <section className="mt-12">
-          <SectionTitle
-            eyebrow="Diagnostic workflow"
-            title="From morphology to hereditary risk"
-            description="Use pathology findings as part of a broader assessment—not as a stand-alone genetic test."
-          />
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            {workflow.map((step) => (
-              <div
-                key={step.title}
-                className="rounded-2xl border border-slate-200 bg-white p-5"
-              >
-                <h3 className="font-semibold text-slate-950">{step.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
-                  {step.body}
-                </p>
-              </div>
-            ))}
-          </div>
         </section>
 
         <section className="mt-12">

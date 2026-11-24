@@ -8,7 +8,7 @@ export default function EndocrineDirectoryPage() {
       intro="An organ-based diagnostic directory of endocrine tumors and related lesions, with dedicated sections for adrenal, pituitary, parathyroid, and thyroid pathology, as well as hereditary tumor-predisposition syndromes."
       groups={[
         {
-          title: "Adrenal Gland",
+          title: "",
           items: [
             {
               title: "Adrenal Gland Tumors",
@@ -19,7 +19,7 @@ export default function EndocrineDirectoryPage() {
           ],
         },
         {
-          title: "Pituitary",
+          title: "",
           items: [
             {
               title: "Pituitary Tumors",
@@ -30,7 +30,7 @@ export default function EndocrineDirectoryPage() {
           ],
         },
         {
-          title: "Parathyroid",
+          title: "",
           items: [
             {
               title: "Parathyroid Tumors",
@@ -41,7 +41,7 @@ export default function EndocrineDirectoryPage() {
           ],
         },
         {
-          title: "Thyroid",
+          title: "",
           items: [
             {
               title: "Thyroid Tumors",
@@ -52,7 +52,7 @@ export default function EndocrineDirectoryPage() {
           ],
         },
         {
-          title: "Hereditary Tumor Syndromes",
+          title: "",
           items: [
             {
               title: "Genetic Tumor Syndromes",

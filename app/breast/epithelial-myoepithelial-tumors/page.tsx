@@ -203,61 +203,10 @@ export default function EpithelialMyoepithelialTumorsPage() {
       </div>
 
       <div className="mx-auto max-w-7xl px-5 py-10 md:px-8 md:py-14">
-        <header className="mb-12 overflow-hidden rounded-3xl bg-slate-950 text-white shadow-sm">
-          <div className="grid gap-8 p-7 md:grid-cols-[1.5fr_0.8fr] md:p-11">
-            <div className="space-y-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-300">
-                Breast pathology · Diagnostic guide
-              </p>
-              <h1 className="max-w-3xl text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-                Epithelial-Myoepithelial Tumors
-              </h1>
-              <p className="max-w-3xl text-base leading-7 text-slate-300 md:text-lg">
-                A morphology-first approach to biphasic breast neoplasms, with
-                emphasis on recognizing the two cell populations and identifying
-                features that raise concern for malignancy.
-              </p>
-              <div className="flex flex-wrap gap-2 pt-1 text-xs font-medium">
-                <span className="rounded-full border border-white/20 px-3 py-1.5 text-slate-200">
-                  H&E first
-                </span>
-                <span className="rounded-full border border-white/20 px-3 py-1.5 text-slate-200">
-                  IHC panel approach
-                </span>
-                <span className="rounded-full border border-white/20 px-3 py-1.5 text-slate-200">
-                  Diagnostic pitfalls
-                </span>
-              </div>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6">
-              <p className="text-sm font-semibold text-teal-200">
-                Core diagnostic question
-              </p>
-              <p className="mt-3 text-xl font-medium leading-8">
-                Is this a true biphasic neoplasm—and is either component
-                malignant?
-              </p>
-              <div className="mt-5 space-y-3 text-sm leading-6 text-slate-300">
-                <p>
-                  <span className="font-semibold text-white">
-                    Luminal cells:
-                  </span>{" "}
-                  epithelial differentiation.
-                </p>
-                <p>
-                  <span className="font-semibold text-white">
-                    Abluminal cells:
-                  </span>{" "}
-                  myoepithelial differentiation.
-                </p>
-                <p>
-                  <span className="font-semibold text-white">Malignancy:</span>{" "}
-                  assess cytology, mitoses, necrosis, invasion, and
-                  component-specific changes.
-                </p>
-              </div>
-            </div>
-          </div>
+        <header className="mb-10">
+          <h1 className="text-3xl font-semibold tracking-tight text-slate-950 md:text-5xl">
+            Epithelial-Myoepithelial Tumors
+          </h1>
         </header>
 
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_260px]">
@@ -321,64 +270,8 @@ export default function EpithelialMyoepithelialTumorsPage() {
             </Section>
 
             <Section
-              id="gps"
-              eyebrow="02 · Diagnostic workflow"
-              title="Diagnostic GPS"
-            >
-              <div className="space-y-3">
-                {[
-                  [
-                    "1",
-                    "Start at low power",
-                    "Assess circumscription, lobulation, satellite nodules, sclerosis, matrix, papillary growth, and any irregular infiltrative edge.",
-                  ],
-                  [
-                    "2",
-                    "Confirm the biphasic pattern",
-                    "Look for inner luminal epithelial cells and an outer myoepithelial population. Determine whether the myoepithelial cells are thin and orderly or conspicuous, enlarged, and proliferative.",
-                  ],
-                  [
-                    "3",
-                    "Characterize the architecture",
-                    "Consider glands/strands in chondromyxoid matrix (pleomorphic adenoma) versus a prominent myoepithelial proliferation around glands (AME). Patterns in AME may be tubular, spindle-cell, lobulated, or papillary.",
-                  ],
-                  [
-                    "4",
-                    "Search for malignant features",
-                    "Evaluate nuclear atypia, mitotic activity and atypical mitoses, necrosis, destructive invasion, desmoplasia, and an inflammatory response. Extensively sample heterogeneous or large lesions.",
-                  ],
-                  [
-                    "5",
-                    "Use a targeted IHC panel",
-                    "Combine nuclear and cytoplasmic myoepithelial markers with luminal epithelial markers. Interpret staining distribution and intensity in the context of H&E.",
-                  ],
-                  [
-                    "6",
-                    "Classify and communicate",
-                    "Separate classic AME, atypical AME, and M-AME. If DCIS arises in an AME, report it as DCIS and manage it accordingly.",
-                  ],
-                ].map(([number, title, text]) => (
-                  <div
-                    key={number}
-                    className="flex gap-4 rounded-2xl border border-slate-200 bg-white p-5"
-                  >
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-teal-700 text-sm font-bold text-white">
-                      {number}
-                    </div>
-                    <div>
-                      <h3 className="font-semibold">{title}</h3>
-                      <p className="mt-1 text-sm leading-6 text-slate-600">
-                        {text}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Section>
-
-            <Section
               id="entities"
-              eyebrow="03 · Entity profiles"
+              eyebrow="02 · Entity profiles"
               title="Key entities and morphology"
             >
               <div className="space-y-5">
@@ -441,7 +334,7 @@ export default function EpithelialMyoepithelialTumorsPage() {
 
             <Section
               id="ihc"
-              eyebrow="04 · Ancillary studies"
+              eyebrow="03 · Ancillary studies"
               title="Immunohistochemistry: use a panel"
             >
               <p className="max-w-4xl text-sm leading-6 text-slate-700">
@@ -507,7 +400,7 @@ export default function EpithelialMyoepithelialTumorsPage() {
 
             <Section
               id="differential"
-              eyebrow="05 · Differential diagnosis"
+              eyebrow="04 · Differential diagnosis"
               title="High-yield differential diagnosis"
             >
               <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
@@ -541,7 +434,7 @@ export default function EpithelialMyoepithelialTumorsPage() {
 
             <Section
               id="molecular"
-              eyebrow="06 · Molecular context"
+              eyebrow="05 · Molecular context"
               title="Molecular findings: supportive, not a substitute for morphology"
             >
               <div className="grid gap-4 md:grid-cols-2">
@@ -575,7 +468,7 @@ export default function EpithelialMyoepithelialTumorsPage() {
 
             <Section
               id="signout"
-              eyebrow="07 · Reporting"
+              eyebrow="06 · Reporting"
               title="Sign-out checklist"
             >
               <div className="rounded-2xl border border-slate-200 bg-white p-5 md:p-7">
@@ -634,7 +527,6 @@ export default function EpithelialMyoepithelialTumorsPage() {
                 <nav className="mt-4 space-y-3 text-sm">
                   {[
                     ["overview", "Classification"],
-                    ["gps", "Diagnostic GPS"],
                     ["entities", "Entity profiles"],
                     ["ihc", "Immunohistochemistry"],
                     ["differential", "Differential diagnosis"],

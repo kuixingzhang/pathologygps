@@ -918,75 +918,13 @@ export default function MesenchymalTumorsPage() {
           <div className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
             PathologyGPS / Digestive System / Mesenchymal Tumors
           </div>
-          <div className="grid gap-8 lg:grid-cols-[1.4fr_.6fr] lg:items-end">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
-                Mesenchymal Tumors of the Digestive System
-              </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-                A morphology-first reference integrating clinical setting,
-                architecture, immunophenotype, and defining molecular
-                alterations.
-              </p>
-            </div>
-            <div className="rounded-2xl bg-slate-900 p-5 text-white">
-              <div className="text-xs font-semibold uppercase tracking-widest text-teal-300">
-                Core diagnostic principle
-              </div>
-              <p className="mt-2 text-xl font-semibold leading-7">
-                Establish lineage before assigning behavior.
-              </p>
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                Integrate site, morphology, targeted IHC, and molecular
-                findings. For GIST, use site, size, mitotic count, and rupture
-                for risk assessment.
-              </p>
-            </div>
-          </div>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
+            Mesenchymal Tumors of the Digestive System
+          </h1>
         </div>
       </header>
 
       <div className="mx-auto max-w-7xl space-y-8 px-5 py-8">
-        <Panel title="Diagnostic GPS: from a digestive-system mass to classification">
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-            {[
-              [
-                "Define the setting",
-                "Confirm the organ of origin, mural versus extramural location, depth, size, multiplicity, and clinical history.",
-              ],
-              [
-                "Recognize the pattern",
-                "Spindle cell, epithelioid, round cell, myxoid, inflammatory, vascular, perivascular, or mixed epithelial–mesenchymal.",
-              ],
-              [
-                "Assess behavior",
-                "Evaluate infiltrative growth, atypia, mitotic activity, necrosis, vascular invasion, and metastasis; apply entity-specific criteria.",
-              ],
-              [
-                "Select targeted IHC",
-                "KIT/DOG1 for GIST; SDHB for SDH-deficient GIST; ALK/ROS1 for IMT; ERG/CD31 for vascular tumors; melanocytic and muscle markers for PEComa.",
-              ],
-              [
-                "Confirm molecularly",
-                "Use defining alterations when relevant: KIT/PDGFRA, ALK/ROS1, WWTR1::CAMTA1, EWSR1, GLI1, or NUTM rearrangements.",
-              ],
-            ].map((step, index) => (
-              <div
-                key={step[0]}
-                className="rounded-xl border border-slate-200 bg-slate-50 p-4"
-              >
-                <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-full bg-teal-700 text-xs font-bold text-white">
-                  {index + 1}
-                </div>
-                <h4 className="font-bold text-slate-900">{step[0]}</h4>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
-                  {step[1]}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Panel>
-
         <div className="grid gap-5 lg:grid-cols-2">
           <Panel title="Behavior categories are not interchangeable with grade">
             <div className="space-y-3 text-sm leading-6 text-slate-700">

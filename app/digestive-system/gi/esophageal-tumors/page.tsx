@@ -378,71 +378,12 @@ export default function EsophagealTumorsPage() {
               <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
                 Esophageal Tumors
               </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-                A morphology-first diagnostic reference focused on essential
-                criteria, histopathology, targeted immunohistochemistry,
-                molecular findings, and practical differential diagnosis.
-              </p>
-            </div>
-            <div className="rounded-2xl bg-slate-900 p-5 text-white">
-              <div className="text-xs font-semibold uppercase tracking-widest text-teal-300">
-                Core rule
-              </div>
-              <p className="mt-2 text-xl font-semibold leading-7">
-                Establish lineage, assess invasion, and interpret the lesion in
-                its anatomic and clinical context.
-              </p>
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                Distinguish squamous and glandular precursor lesions from
-                invasive carcinoma; use targeted ancillary studies to resolve
-                poorly differentiated tumors.
-              </p>
             </div>
           </div>
         </div>
       </header>
 
       <div className="mx-auto max-w-7xl space-y-8 px-5 py-8">
-        <Panel title="Diagnostic GPS: morphology to classification">
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-            {[
-              [
-                "Establish the clinical setting",
-                "Age, sex, exact esophageal level, Barrett mucosa, reflux history, dysphagia, and endoscopic appearance.",
-              ],
-              [
-                "Identify the epithelial lineage",
-                "Squamous, metaplastic glandular, mixed squamous/glandular, or no definite lineage.",
-              ],
-              [
-                "Determine whether invasion is present",
-                "Separate intraepithelial dysplasia from invasive carcinoma; assess depth and lymphovascular invasion in early lesions.",
-              ],
-              [
-                "Use targeted ancillary studies",
-                "p53 in selected dysplasia; p40/p63 for squamous differentiation; neuroendocrine markers and mucin studies for poorly differentiated tumors; SWI/SNF IHC when indicated.",
-              ],
-              [
-                "Integrate biomarkers and treatment context",
-                "For advanced adenocarcinoma, assess HER2, mismatch repair/MSI, PD-L1 CPS, and CLDN18.2 as clinically appropriate; document treatment effect after neoadjuvant therapy.",
-              ],
-            ].map((step, index) => (
-              <div
-                key={index}
-                className="rounded-xl border border-slate-200 bg-slate-50 p-4"
-              >
-                <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-full bg-teal-700 text-xs font-bold text-white">
-                  {index + 1}
-                </div>
-                <h4 className="font-bold text-slate-900">{step[0]}</h4>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
-                  {step[1]}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Panel>
-
         <div className="grid gap-5 lg:grid-cols-2">
           <Panel title="Precursor lesions: the key distinction">
             <div className="space-y-3 text-sm leading-6 text-slate-700">

@@ -1590,12 +1590,6 @@ export default function ThyroidTumorsPage() {
               Thyroid Tumors
             </h1>
           </div>
-          <Link
-            href="/"
-            className="rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50"
-          >
-            Home
-          </Link>
         </div>
         <p className="mt-3 max-w-4xl text-base leading-7 text-slate-600">
           A practical diagnostic reference to developmental lesions,

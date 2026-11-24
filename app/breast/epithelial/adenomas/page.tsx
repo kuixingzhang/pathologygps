@@ -55,34 +55,6 @@ const ihc = [
   ],
 ];
 
-const steps = [
-  [
-    "01",
-    "Confirm a circumscribed glandular lesion",
-    "Assess the border, gland density, stromal volume, and whether a benign dual-cell pattern is preserved.",
-  ],
-  [
-    "02",
-    "Identify the dominant pattern",
-    "Closely packed tubules with scant stroma favor tubular adenoma; secretory lobules favor lactating adenoma; glands in a concentric fibrosclerotic wall favor ductal adenoma.",
-  ],
-  [
-    "03",
-    "Evaluate the myoepithelial layer",
-    "Use p63 or p40 with a cytoplasmic marker such as SMA, calponin, or SMMHC when H&E is equivocal.",
-  ],
-  [
-    "04",
-    "Exclude important mimics",
-    "Consider fibroadenoma, intraductal papilloma, sclerosing adenosis/radial scar, and invasive carcinoma as appropriate.",
-  ],
-  [
-    "05",
-    "Check clinical and imaging concordance",
-    "Review pregnancy/lactation status, growth, imaging, and sampling adequacy. Limited or discordant samples may need additional sampling or excision.",
-  ],
-];
-
 function Table({ headers, data }: { headers: string[]; data: string[][] }) {
   return (
     <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
@@ -136,32 +108,10 @@ export default function BreastAdenomasPage() {
           <span className="mx-2">/</span>
           <span className="text-slate-700">Adenomas</span>
         </nav>
-        <header className="overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-950 via-slate-900 to-teal-950 px-6 py-9 text-white shadow-sm sm:px-10">
-          <div className="max-w-4xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-teal-200">
-              Breast Pathology • Diagnostic Reference
-            </p>
-            <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-              Breast Adenomas
-            </h1>
-            <p className="mt-4 max-w-3xl leading-7 text-slate-200">
-              A practical guide to tubular adenoma, lactating adenoma, and
-              ductal adenoma, emphasizing architecture, the
-              epithelial–myoepithelial bilayer, stromal features, and key
-              diagnostic mimics.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm">
-                Benign glandular tumors
-              </span>
-              <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm">
-                H&E-first approach
-              </span>
-              <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm">
-                IHC when indicated
-              </span>
-            </div>
-          </div>
+        <header className="py-4">
+          <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+            Breast Adenomas
+          </h1>
         </header>
         <section className="mt-8 grid gap-5 lg:grid-cols-[1.4fr_1fr]">
           <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -192,28 +142,6 @@ export default function BreastAdenomasPage() {
               together with imaging and clinical findings.
             </p>
           </aside>
-        </section>
-        <section className="mt-10">
-          <p className="text-sm font-semibold uppercase tracking-widest text-teal-700">
-            Diagnostic GPS
-          </p>
-          <h2 className="mt-1 text-2xl font-bold tracking-tight">
-            A pattern-based approach
-          </h2>
-          <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-            {steps.map((s) => (
-              <article
-                key={s[0]}
-                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-              >
-                <p className="text-sm font-bold tracking-widest text-teal-700">
-                  {s[0]}
-                </p>
-                <h3 className="mt-3 font-semibold leading-6">{s[1]}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{s[2]}</p>
-              </article>
-            ))}
-          </div>
         </section>
         <section className="mt-10">
           <p className="text-sm font-semibold uppercase tracking-widest text-teal-700">

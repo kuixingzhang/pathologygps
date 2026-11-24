@@ -682,47 +682,9 @@ export default function CNSGeneticTumorSyndromesPage() {
         <h1 className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
           CNS Genetic Tumor Syndromes
         </h1>
-        <p className="mt-3 max-w-4xl text-sm leading-7 text-slate-600 sm:text-base">
-          Diagnostic reference to inherited tumor-predisposition syndromes with
-          central or peripheral nervous system manifestations. Recognition of a
-          syndromic pattern should prompt appropriate clinical evaluation and
-          germline testing; tumor findings alone do not establish hereditary
-          status.
-        </p>
       </header>
 
-      <section className="mb-8 grid gap-4 lg:grid-cols-2">
-        <div className="rounded-xl border border-slate-200 bg-white p-4">
-          <h2 className="font-bold text-slate-900">
-            Practical Diagnostic Approach
-          </h2>
-          <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-6 text-slate-700">
-            <li>
-              Recognize tumor multiplicity, unusually young age, characteristic
-              combinations of lesions, and relevant family history.
-            </li>
-            <li>
-              Use morphology and targeted immunohistochemistry to identify
-              pathway-deficient tumors, including loss of INI1, BRG1, BAP1,
-              SDHB, or SDHA when appropriate.
-            </li>
-            <li>
-              Distinguish tumor-level alterations from constitutional variants.
-              A tumor-only pathogenic variant or loss of protein expression does
-              not independently prove a germline syndrome.
-            </li>
-            <li>
-              Recommend genetic counseling and constitutional testing when the
-              clinical or pathologic pattern warrants it; consider mosaicism and
-              nonhematopoietic testing when indicated.
-            </li>
-            <li>
-              Do not use the historical term “Turcot syndrome” as a molecular
-              diagnosis. Evaluate APC-associated FAP and constitutional mismatch
-              repair deficiency as distinct conditions.
-            </li>
-          </ol>
-        </div>
+      <section className="mb-8">
         <div className="rounded-xl border border-slate-200 bg-white p-4">
           <h2 className="font-bold text-slate-900">
             High-Yield Tumor / Syndrome Associations

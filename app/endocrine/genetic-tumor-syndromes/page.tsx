@@ -935,63 +935,7 @@ export default function GeneticTumorSyndromesPage() {
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-950">
           Genetic Tumor Syndromes
         </h1>
-        <p className="mt-3 max-w-4xl text-base leading-7 text-slate-600">
-          A practical diagnostic reference to inherited and mosaic
-          tumor-predisposition syndromes involving endocrine and neuroendocrine
-          organs. Emphasis is placed on clinicopathologic recognition, essential
-          diagnostic criteria, histopathology, immunophenotype, and molecular
-          confirmation.
-        </p>
       </header>
-
-      <section className="mb-8 rounded-2xl border border-teal-200 bg-teal-50/70 p-5">
-        <h2 className="text-lg font-bold text-teal-950">
-          Diagnostic Approach: Start Here
-        </h2>
-        <ol className="mt-3 grid gap-3 md:grid-cols-2">
-          {[
-            [
-              "1. Recognize the tumor pattern",
-              "Multifocal, bilateral, unusually young-onset, or multiple-organ tumors should prompt consideration of hereditary predisposition.",
-            ],
-            [
-              "2. Look beyond the index tumor",
-              "Review skin, jaw, kidney, lung, CNS, gastrointestinal tract, reproductive organs, and family history for syndrome-defining lesions.",
-            ],
-            [
-              "3. Use morphology and IHC to triage",
-              "Menin, parafibromin, SDHB/SDHA, and lineage-specific markers can identify pathway loss or support targeted germline testing.",
-            ],
-            [
-              "4. Separate germline from somatic findings",
-              "A tumor-only alteration does not establish an inherited syndrome; confirm suspected hereditary disease with germline testing.",
-            ],
-            [
-              "5. Consider mosaic disorders",
-              "A negative blood test does not exclude McCune–Albright syndrome or other mosaic conditions; affected tissue may be more informative.",
-            ],
-            [
-              "6. Classify the family pattern",
-              "Distinguish defined syndromic thyroid cancer from non-syndromic familial thyroid carcinoma, and use gene-based terminology for SDH-related disease.",
-            ],
-          ].map(([h, t]) => (
-            <li
-              key={h}
-              className="rounded-xl border border-teal-100 bg-white p-3"
-            >
-              <div className="font-semibold text-slate-900">{h}</div>
-              <p className="mt-1 text-sm leading-6 text-slate-600">{t}</p>
-            </li>
-          ))}
-        </ol>
-        <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm leading-6 text-amber-950">
-          <strong>Critical principle:</strong> Histology often resembles the
-          sporadic counterpart. The hereditary diagnosis depends on the
-          combination of tumor distribution, extra-organ manifestations, family
-          history, syndrome-specific immunophenotype, and germline or mosaic
-          molecular findings.
-        </div>
-      </section>
 
       <section className="mb-8 grid gap-4 lg:grid-cols-2">
         <div className="rounded-xl border border-slate-200 bg-white p-4">

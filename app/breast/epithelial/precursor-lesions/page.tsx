@@ -125,71 +125,11 @@ export default function BreastPrecursorLesionsPage() {
             ← Breast Pathology
           </Link>
         </div>
-        <header className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-700">
-            PathologyGPS · Breast
-          </p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">
+        <header className="py-2">
+          <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
             Breast Precursor and Proliferative Lesions
           </h1>
-          <p className="mt-3 max-w-4xl text-base leading-7 text-slate-600">
-            A practical diagnostic guide to benign epithelial proliferations,
-            low-grade precursor lesions, adenosis, and selected sclerosing
-            lesions—with emphasis on architecture, cytology,
-            immunohistochemistry, and core biopsy limitations.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-2">
-            {[
-              "Morphology first",
-              "IHC as an adjunct",
-              "Quantify extent",
-              "Radiology–pathology correlation",
-            ].map((x) => (
-              <span
-                key={x}
-                className="rounded-full bg-blue-50 px-3 py-1 text-sm font-medium text-blue-800"
-              >
-                {x}
-              </span>
-            ))}
-          </div>
         </header>
-
-        <section className="mt-6 rounded-2xl border border-blue-200 bg-blue-50/70 p-5 md:p-6">
-          <h2 className="text-xl font-bold">Diagnostic GPS</h2>
-          <ol className="mt-4 grid gap-3 md:grid-cols-5">
-            {[
-              [
-                "1 · Low power",
-                "Is the process duct-centered, lobulocentric, or haphazard/non-lobulocentric?",
-              ],
-              [
-                "2 · Cytology",
-                "Heterogeneous cells favor UDH; monotonous low-grade cells raise FEA/ADH/DCIS.",
-              ],
-              [
-                "3 · Architecture",
-                "Look for fenestrations, apical snouts, rigid bridges, cribriform spaces, or sclerosis.",
-              ],
-              [
-                "4 · Myoepithelium / BM",
-                "Use targeted IHC when invasion is in the differential; MGA is BM-positive but myoepithelium-negative.",
-              ],
-              [
-                "5 · Extent & concordance",
-                "For ADH versus low-grade DCIS, quantify extent and integrate sampling and imaging.",
-              ],
-            ].map(([a, b]) => (
-              <li
-                key={a}
-                className="rounded-xl border border-blue-100 bg-white p-3"
-              >
-                <h3 className="font-semibold">{a}</h3>
-                <p className="mt-1 text-sm leading-6 text-slate-600">{b}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
 
         <section className="mt-8">
           <div className="mb-3 flex flex-wrap items-end justify-between gap-3">

@@ -626,74 +626,12 @@ export default function LiverTumorsPage() {
           <div className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
             PathologyGPS / GI & Liver / Liver Tumors
           </div>
-          <div className="grid gap-8 lg:grid-cols-[1.4fr_.6fr] lg:items-end">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
-                Liver Tumors
-              </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-                A morphology-first diagnostic reference to hepatocellular and
-                biliary tumors, emphasizing subtype classification,
-                immunophenotype, molecular findings, and practical differential
-                diagnosis.
-              </p>
-            </div>
-            <div className="rounded-2xl bg-slate-900 p-5 text-white">
-              <div className="text-xs font-semibold uppercase tracking-widest text-teal-300">
-                Core rule
-              </div>
-              <p className="mt-2 text-xl font-semibold leading-7">
-                Classify the lesion by architecture and differentiation, then
-                use targeted IHC and molecular testing to resolve the subtype.
-              </p>
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                For hepatocellular adenoma, subtype assignment is clinically
-                meaningful because β-catenin activation and sonic hedgehog
-                pathway activation affect risk assessment.
-              </p>
-            </div>
-          </div>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
+            Liver Tumors
+          </h1>
         </div>
       </header>
       <div className="mx-auto max-w-7xl space-y-8 px-5 py-8">
-        <Panel title="Diagnostic GPS: from clinical setting to classification">
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-            {[
-              [
-                "Establish the clinical setting",
-                "Age, sex, background liver, cirrhosis, metabolic disease, viral hepatitis, hormone/steroid exposure, and imaging.",
-              ],
-              [
-                "Identify the dominant pattern",
-                "Hepatocellular nodule; trabecular carcinoma; small-duct glands; mucinous large-duct carcinoma; or cystic epithelial neoplasm.",
-              ],
-              [
-                "Assess architecture",
-                "Reticulin framework, plate thickness, stromal invasion, ductular reaction, desmoplasia, and vascular/perineural invasion.",
-              ],
-              [
-                "Apply targeted IHC",
-                "GS, L-FABP, SAA/CRP, PTGDS/ASS1, hepatocellular markers, and biliary markers according to the differential.",
-              ],
-              [
-                "Use molecular testing selectively",
-                "CTNNB1 subtype/risk assessment, INHBE::GLI1, and actionable iCCA alterations when clinically relevant.",
-              ],
-            ].map((x, i) => (
-              <div
-                key={i}
-                className="rounded-xl border border-slate-200 bg-slate-50 p-4"
-              >
-                <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-full bg-teal-700 text-xs font-bold text-white">
-                  {i + 1}
-                </div>
-                <h4 className="font-bold text-slate-900">{x[0]}</h4>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{x[1]}</p>
-              </div>
-            ))}
-          </div>
-        </Panel>
-
         <Panel title="Hepatocellular adenoma: integrated subtype classification">
           <p className="mb-4 text-sm leading-6 text-slate-600">
             The table integrates the WHO-described morphology, defining

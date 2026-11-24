@@ -367,35 +367,10 @@ export default function RareInvasiveNeoplasmsPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <header className="overflow-hidden rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-7 text-white shadow-lg sm:p-10">
-          <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200">
-            <span>PathologyGPS</span>
-            <span className="text-slate-500">/</span>
-            <span>Breast Pathology</span>
-          </div>
-          <h1 className="mt-4 max-w-4xl text-3xl font-bold tracking-tight sm:text-5xl">
+        <header className="py-2">
+          <h1 className="text-3xl font-bold tracking-tight text-slate-950 sm:text-5xl">
             Rare Invasive Breast Neoplasms
           </h1>
-          <p className="mt-4 max-w-3xl text-base leading-7 text-slate-200 sm:text-lg">
-            A morphology-first diagnostic guide to salivary gland–like
-            carcinomas, other rare invasive carcinomas, and breast
-            neuroendocrine neoplasms.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-2">
-            {[
-              "H&E pattern recognition",
-              "Focused IHC",
-              "Molecular confirmation",
-              "Primary vs. metastatic",
-            ].map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-slate-100"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
         </header>
 
         <section className="mt-8 grid gap-4 md:grid-cols-3">
@@ -435,36 +410,6 @@ export default function RareInvasiveNeoplasmsPage() {
               mucinous cystadenocarcinoma when an associated in situ component
               is absent.
             </p>
-          </div>
-        </section>
-
-        <section className="mt-10">
-          <div className="flex flex-wrap items-end justify-between gap-3">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-wider text-indigo-700">
-                Diagnostic GPS
-              </p>
-              <h2 className="mt-1 text-2xl font-bold tracking-tight">
-                A practical workflow
-              </h2>
-            </div>
-            <p className="max-w-xl text-sm leading-6 text-slate-600">
-              Use the smallest panel that answers the morphologic question, and
-              interpret results in context.
-            </p>
-          </div>
-          <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-            {workflow.map((step) => (
-              <div
-                key={step.title}
-                className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
-              >
-                <h3 className="font-semibold text-slate-900">{step.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
-                  {step.text}
-                </p>
-              </div>
-            ))}
           </div>
         </section>
 

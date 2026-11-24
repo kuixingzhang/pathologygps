@@ -310,27 +310,12 @@ export default function UterineCorpusEpithelialTumorsPage() {
     <main className="min-h-screen bg-slate-50 text-slate-800">
       <header className="bg-white border-b border-slate-200">
         <div className="mx-auto max-w-7xl px-5 py-12">
-          <div className="flex flex-wrap items-center gap-2 mb-4">
-            <Badge>PathologyGPS</Badge>
-            <Badge>Gynecologic Pathology</Badge>
-            <Badge>Diagnostic Reference</Badge>
-          </div>
           <p className="text-sm font-semibold uppercase tracking-[.18em] text-teal-700">
             Female Genital Tract · Uterine Corpus
           </p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-slate-950 md:text-5xl">
             Epithelial Tumors of the Uterine Corpus
           </h1>
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-            A morphology-first diagnostic guide to endometrial precursors and
-            carcinomas, emphasizing histologic recognition, invasion,
-            immunohistochemistry, and practical differential diagnosis.
-          </p>
-          <div className="mt-7 flex flex-wrap gap-3 text-sm text-slate-600">
-            <span>H&E → Histotype → IHC → Molecular class</span>
-            <span>•</span>
-            <span>American English</span>
-          </div>
         </div>
       </header>
       <div className="mx-auto max-w-7xl px-5 py-10">

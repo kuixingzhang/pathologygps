@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 type Profile = {
   name: string;
   category: string;
@@ -237,13 +235,6 @@ export default function VulvarMesenchymalTumorsPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
       <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 sm:py-14">
-        <Link
-          href="/female-genital-tract/vulva"
-          className="inline-flex items-center gap-2 text-sm font-medium text-rose-700 hover:text-rose-900 dark:text-rose-300"
-        >
-          <span aria-hidden="true">←</span> Vulva
-        </Link>
-
         <header className="relative mt-5 overflow-hidden rounded-3xl border border-slate-200 bg-white px-6 py-8 shadow-sm sm:px-10 sm:py-11 dark:border-slate-800 dark:bg-slate-900">
           <div
             aria-hidden="true"
@@ -256,27 +247,6 @@ export default function VulvarMesenchymalTumorsPage() {
             <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">
               Mesenchymal Tumors
             </h1>
-            <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg dark:text-slate-300">
-              A morphology-first guide to selected vulvar mesenchymal tumors,
-              emphasizing depth and circumscription, vascular architecture,
-              stromal quality, and focused immunohistochemical and molecular
-              findings.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {[
-                "Fibroblastic / Myofibroblastic",
-                "Vascular Architecture",
-                "Myxoid Tumors",
-                "RB1 / HMGA2 / Fusion Findings",
-              ].map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
           </div>
         </header>
 

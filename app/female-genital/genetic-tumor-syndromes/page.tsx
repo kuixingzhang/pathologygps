@@ -210,34 +210,6 @@ const overviewOnly = [
   ],
 ];
 
-const workflow = [
-  {
-    title: "1. Recognize the tumor phenotype",
-    detail:
-      "Start with the actual neoplasm and its morphology. Examples include tubo-ovarian HGSC/STIC, endometrioid carcinoma with dMMR, gastric-type cervical adenocarcinoma, bilateral/multifocal SCTAT, cervical ERMS with fetal-type cartilage, FH-deficient leiomyoma, or an unusually early/multiple primary cancer pattern.",
-  },
-  {
-    title: "2. Ask whether the pattern is syndrome-enriched",
-    detail:
-      "Integrate age, tumor site, multiplicity, bilateral disease, precursor lesions, associated non-gynecologic tumors, and personal/family history. No single morphologic feature is sufficient for most syndromes.",
-  },
-  {
-    title: "3. Select the tumor-level ancillary test",
-    detail:
-      "Use the test matched to the phenotype: MMR IHC ± MLH1 promoter methylation/MSI; FH and 2SC IHC; or appropriate tumor sequencing. For risk-reducing tubes, apply SEE-FIM.",
-  },
-  {
-    title: "4. Separate tumor phenotype from inherited status",
-    detail:
-      "Abnormal tumor IHC, HRD, or a tumor-only variant may be somatic. A constitutional/germline pathogenic variant (or the specific clinical criteria stated for PJS/LFS) is required to establish the inherited syndrome.",
-  },
-  {
-    title: "5. Recommend genetics correlation",
-    detail:
-      "Communicate the histologic clue and tumor test result, and recommend genetic counseling/constitutional testing when indicated. Do not label a patient as having a hereditary syndrome based only on tumor morphology or IHC.",
-  },
-];
-
 function Panel({
   title,
   children,
@@ -318,52 +290,12 @@ export default function GeneticTumorSyndromesPage() {
               <h1 className="max-w-4xl text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
                 Genetic Tumor Syndromes of the Female Genital Tract
               </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-                A morphology-led diagnostic guide to hereditary cancer
-                predisposition: recognize syndrome-associated tumor patterns,
-                choose the appropriate tumor-level tests, and distinguish
-                somatic findings from constitutional disease.
-              </p>
-            </div>
-            <div className="rounded-2xl bg-slate-900 p-5 text-white">
-              <div className="text-xs font-semibold uppercase tracking-widest text-teal-300">
-                Diagnostic principle
-              </div>
-              <p className="mt-2 text-xl font-semibold leading-7">
-                A tumor phenotype can raise suspicion. Germline testing
-                establishes inherited predisposition.
-              </p>
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                Most syndromes follow a two-hit tumor-suppressor model, but the
-                diagnostic evidence required differs by syndrome.
-              </p>
             </div>
           </div>
         </div>
       </div>
 
       <div className="mx-auto max-w-7xl space-y-8 px-5 py-8">
-        <Panel title="Diagnostic GPS: from morphology to hereditary diagnosis">
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-            {workflow.map((step, i) => (
-              <div
-                key={step.title}
-                className="rounded-xl border border-slate-200 bg-slate-50 p-4"
-              >
-                <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-full bg-teal-700 text-xs font-bold text-white">
-                  {i + 1}
-                </div>
-                <h4 className="font-bold text-slate-900">
-                  {step.title.replace(/^\d+\.\s*/, "")}
-                </h4>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
-                  {step.detail}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Panel>
-
         <div className="grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
           <Panel title="Core diagnostic distinction" accent="violet">
             <div className="space-y-4 text-sm leading-6">

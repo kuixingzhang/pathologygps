@@ -21,13 +21,9 @@ export default function RouteNavigation() {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-2.5 md:px-8">
         <Link
           href="/"
-          aria-label="Diagnostic Navigation System Home"
-          className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-white transition hover:text-[#D5DFEC] md:text-sm"
+          aria-label="Home"
+          className="inline-flex items-center text-xs font-semibold text-white transition hover:text-[#D5DFEC] md:text-sm"
         >
-          <span>Diagnostic Navigation System</span>
-          <span aria-hidden="true" className="text-[#9FB3CC]">
-            ·
-          </span>
           <span>Home</span>
         </Link>
 
@@ -46,7 +42,7 @@ export default function RouteNavigation() {
           <Link
             href="/about"
             aria-current={pathname === "/about" ? "page" : undefined}
-            className="inline-flex items-center rounded-md border border-white/35 px-3 py-1.5 text-xs font-semibold text-white transition hover:border-white hover:bg-white/10 md:text-sm"
+            className="inline-flex items-center text-xs font-semibold text-white transition hover:text-[#D5DFEC] md:text-sm"
           >
             About
           </Link>

@@ -188,21 +188,25 @@ function Section({
 }: {
   id: string;
   eyebrow?: string;
-  title: string;
+  title?: string;
   children: React.ReactNode;
 }) {
   return (
     <section id={id} className="scroll-mt-24 space-y-5">
-      <div className="space-y-2">
-        {eyebrow && (
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
-            {eyebrow}
-          </p>
-        )}
-        <h2 className="text-2xl font-semibold tracking-tight text-slate-950 md:text-3xl">
-          {title}
-        </h2>
-      </div>
+      {(eyebrow || title) && (
+        <div className="space-y-2">
+          {eyebrow && (
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
+              {eyebrow}
+            </p>
+          )}
+          {title && (
+            <h2 className="text-2xl font-semibold tracking-tight text-slate-950 md:text-3xl">
+              {title}
+            </h2>
+          )}
+        </div>
+      )}
       {children}
     </section>
   );
@@ -247,59 +251,6 @@ export default function NonInvasiveNeoplasiaPage() {
       </div>
 
       <div className="mx-auto max-w-7xl px-5 py-10 md:px-8 md:py-14">
-        <header className="mb-12 overflow-hidden rounded-3xl bg-slate-950 text-white shadow-sm">
-          <div className="grid gap-8 p-7 md:grid-cols-[1.5fr_0.8fr] md:p-11">
-            <div className="space-y-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-300">
-                Breast pathology · Diagnostic guide
-              </p>
-              <h1 className="max-w-3xl text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-                Non-Invasive Neoplasia
-              </h1>
-              <p className="max-w-3xl text-base leading-7 text-slate-300 md:text-lg">
-                A practical, morphology-first guide to lobular neoplasia,
-                atypical ductal hyperplasia, and ductal carcinoma in situ—with
-                emphasis on quantitative thresholds, immunohistochemistry, and
-                radiology–pathology correlation.
-              </p>
-              <div className="flex flex-wrap gap-2 pt-1 text-xs font-medium">
-                <span className="rounded-full border border-white/20 px-3 py-1.5 text-slate-200">
-                  H&E first
-                </span>
-                <span className="rounded-full border border-white/20 px-3 py-1.5 text-slate-200">
-                  Quantitative thresholds
-                </span>
-                <span className="rounded-full border border-white/20 px-3 py-1.5 text-slate-200">
-                  Risk and upgrade assessment
-                </span>
-              </div>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6">
-              <p className="text-sm font-semibold text-teal-200">
-                Core diagnostic question
-              </p>
-              <p className="mt-3 text-xl font-medium leading-8">
-                Is this lobular or ductal neoplasia—and how far has it
-                developed?
-              </p>
-              <div className="mt-5 space-y-3 text-sm leading-6 text-slate-300">
-                <p>
-                  <strong className="text-white">Lobular:</strong> discohesive
-                  cells; E-cadherin pathway abnormality is typical.
-                </p>
-                <p>
-                  <strong className="text-white">Ductal:</strong> cohesive
-                  cells; assess architecture, nuclear grade, and extent.
-                </p>
-                <p>
-                  <strong className="text-white">Always:</strong> correlate
-                  pathology with the imaging target.
-                </p>
-              </div>
-            </div>
-          </div>
-        </header>
-
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_260px]">
           <div className="min-w-0 space-y-14">
             <Section
@@ -365,11 +316,7 @@ export default function NonInvasiveNeoplasiaPage() {
               </div>
             </Section>
 
-            <Section
-              id="workflow"
-              eyebrow="02 · Diagnostic workflow"
-              title="Diagnostic GPS"
-            >
+            <Section id="workflow">
               <div className="space-y-3">
                 {workflow.map(([title, text], i) => (
                   <div
@@ -392,7 +339,7 @@ export default function NonInvasiveNeoplasiaPage() {
 
             <Section
               id="entities"
-              eyebrow="03 · Entity profiles"
+              eyebrow="02 · Entity profiles"
               title="Lesion-by-lesion guide"
             >
               <div className="space-y-5">
@@ -452,7 +399,7 @@ export default function NonInvasiveNeoplasiaPage() {
 
             <Section
               id="ihc"
-              eyebrow="04 · Ancillary studies"
+              eyebrow="03 · Ancillary studies"
               title="IHC patterns and practical limitations"
             >
               <div className="grid gap-4 md:grid-cols-2">
@@ -520,7 +467,7 @@ export default function NonInvasiveNeoplasiaPage() {
 
             <Section
               id="pitfalls"
-              eyebrow="05 · Diagnostic pitfalls"
+              eyebrow="04 · Diagnostic pitfalls"
               title="Common traps"
             >
               <div className="grid gap-4 md:grid-cols-2">
@@ -565,7 +512,7 @@ export default function NonInvasiveNeoplasiaPage() {
 
             <Section
               id="signout"
-              eyebrow="06 · Reporting"
+              eyebrow="05 · Reporting"
               title="Sign-out checklist"
             >
               <div className="rounded-2xl border border-slate-200 bg-white p-5 md:p-7">
@@ -625,7 +572,7 @@ export default function NonInvasiveNeoplasiaPage() {
                 <nav className="mt-4 space-y-3 text-sm">
                   {[
                     ["overview", "Classification"],
-                    ["workflow", "Diagnostic GPS"],
+                    ["workflow", "Diagnostic workflow"],
                     ["entities", "Lesion profiles"],
                     ["alh", "ALH"],
                     ["classic-lcis", "Classic LCIS"],
@@ -646,16 +593,6 @@ export default function NonInvasiveNeoplasiaPage() {
                     </a>
                   ))}
                 </nav>
-              </div>
-              <div className="rounded-2xl bg-slate-950 p-5 text-white">
-                <p className="text-xs font-semibold uppercase tracking-wider text-teal-300">
-                  Key reminder
-                </p>
-                <p className="mt-3 text-sm leading-6 text-slate-200">
-                  For borderline low-grade lesions, extent matters. For lobular
-                  lesions, cohesion and the E-cadherin pathway matter. For all
-                  lesions, concordance matters.
-                </p>
               </div>
             </div>
           </aside>

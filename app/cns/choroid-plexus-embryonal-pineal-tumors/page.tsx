@@ -1229,33 +1229,7 @@ export default function ChoroidPlexusEmbryonalPinealTumorsPage() {
               <h1 className="mt-2 text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">
                 Choroid Plexus, Embryonal, and Pineal Tumors
               </h1>
-              <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-600">
-                Morphology-first diagnostic reference integrating histology,
-                immunohistochemistry, molecular classification, and clinically
-                relevant differential diagnosis.
-              </p>
             </div>
-            <a
-              href="/central-nervous-system"
-              className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-            >
-              CNS Directory
-            </a>
-          </div>
-          <div className="mt-5 grid gap-3 sm:grid-cols-4">
-            {[
-              ["Choroid plexus tumors", "3 entities"],
-              ["Medulloblastomas", "5 entities"],
-              ["Other embryonal tumors", "6 entities"],
-              ["Pineal region tumors", "5 entities"],
-            ].map(([label, value]) => (
-              <div key={label} className="rounded-xl bg-slate-50 p-3">
-                <div className="text-xs text-slate-500">{label}</div>
-                <div className="mt-1 text-lg font-bold text-slate-900">
-                  {value}
-                </div>
-              </div>
-            ))}
           </div>
         </header>
 

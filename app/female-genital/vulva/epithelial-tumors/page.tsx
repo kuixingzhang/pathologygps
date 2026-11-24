@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 type Profile = {
   name: string;
   category: string;
@@ -329,13 +327,6 @@ export default function VulvarEpithelialTumorsPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
       <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 sm:py-14">
-        <Link
-          href="/female-genital-tract/vulva"
-          className="inline-flex items-center gap-2 text-sm font-medium text-rose-700 hover:text-rose-900 dark:text-rose-300"
-        >
-          <span aria-hidden="true">←</span> Vulva
-        </Link>
-
         <header className="relative mt-5 overflow-hidden rounded-3xl border border-slate-200 bg-white px-6 py-8 shadow-sm sm:px-10 sm:py-11 dark:border-slate-800 dark:bg-slate-900">
           <div
             aria-hidden="true"

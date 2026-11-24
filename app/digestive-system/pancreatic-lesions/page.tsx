@@ -628,32 +628,9 @@ export default function PancreaticLesionsPage() {
           <div className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
             PathologyGPS / GI & Hepatopancreatobiliary / Pancreatic Lesions
           </div>
-          <div className="grid gap-8 lg:grid-cols-[1.4fr_.6fr] lg:items-end">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
-                Pancreatic Lesions
-              </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-                A morphology-first diagnostic reference covering benign
-                epithelial neoplasms and precursors, invasive carcinomas,
-                targeted immunohistochemistry, and practical differential
-                diagnosis.
-              </p>
-            </div>
-            <div className="rounded-2xl bg-slate-900 p-5 text-white">
-              <div className="text-xs font-semibold uppercase tracking-widest text-teal-300">
-                Core diagnostic principle
-              </div>
-              <p className="mt-2 text-xl font-semibold leading-7">
-                Establish the growth pattern and prove invasion.
-              </p>
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                For PDAC, fibrosis and atypical ducts alone are insufficient.
-                Haphazard infiltrative glands, desmoplasia, perineural invasion,
-                and vascular invasion are key findings.
-              </p>
-            </div>
-          </div>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
+            Pancreatic Lesions
+          </h1>
         </div>
       </header>
       <div className="mx-auto max-w-7xl space-y-8 px-5 py-8">
@@ -767,43 +744,6 @@ export default function PancreaticLesionsPage() {
                 </tr>
               </tbody>
             </table>
-          </div>
-        </Panel>
-        <Panel title="Diagnostic GPS: classify before ancillary testing">
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-            {[
-              [
-                "Define configuration",
-                "Solid mass, true cyst, or ductal dilatation? Does it communicate with the pancreatic duct?",
-              ],
-              [
-                "Identify differentiation",
-                "Ductal/mucinous, serous/glycogen-rich, oncocytic, acinar, neuroendocrine, or solid pseudopapillary.",
-              ],
-              [
-                "Establish grade",
-                "For PanIN, IPMN, and MCN, report the highest grade; high-grade dysplasia is not invasion.",
-              ],
-              [
-                "Prove invasion",
-                "Seek destructive infiltrative glands, desmoplasia, perineural or vascular invasion, or extension beyond normal duct anatomy.",
-              ],
-              [
-                "Use focused tests",
-                "Choose IHC/molecular assays to resolve a defined differential; no single marker distinguishes PDAC from reactive ducts.",
-              ],
-            ].map((x, i) => (
-              <div
-                key={i}
-                className="rounded-xl border border-slate-200 bg-slate-50 p-4"
-              >
-                <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-full bg-teal-700 text-xs font-bold text-white">
-                  {i + 1}
-                </div>
-                <h4 className="font-bold text-slate-900">{x[0]}</h4>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{x[1]}</p>
-              </div>
-            ))}
           </div>
         </Panel>
         <section>

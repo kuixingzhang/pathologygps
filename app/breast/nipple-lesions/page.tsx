@@ -181,98 +181,10 @@ export default function NippleLesionsPage() {
           <h1 className="mt-3 max-w-4xl text-3xl font-bold tracking-tight sm:text-5xl">
             Nipple Lesions
           </h1>
-          <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600">
-            A practical diagnostic guide to nipple–areola complex lesions,
-            emphasizing anatomic localization, histologic patterns, targeted
-            immunohistochemistry, and the distinction between benign mimics and
-            malignancy.
-          </p>
-          <nav className="mt-6 flex flex-wrap gap-2 text-sm">
-            {[
-              ["#gps", "Diagnostic GPS"],
-              ["#comparison", "Differential table"],
-              ["#ihc", "IHC guide"],
-              ["#redflags", "Diagnostic red flags"],
-              ["#sampling", "Biopsy checklist"],
-            ].map(([href, label]) => (
-              <a
-                key={href}
-                href={href}
-                className="rounded-full border border-slate-300 px-4 py-2 hover:border-blue-400 hover:text-blue-700"
-              >
-                {label}
-              </a>
-            ))}
-          </nav>
         </div>
       </header>
       <div className="mx-auto grid max-w-7xl gap-8 px-5 py-8 sm:px-8 lg:grid-cols-[minmax(0,1fr)_250px]">
         <div className="min-w-0 space-y-12">
-          <section id="gps" className="scroll-mt-6">
-            <h2 className="text-2xl font-bold sm:text-3xl">Diagnostic GPS</h2>
-            <p className="mt-3 max-w-3xl leading-7 text-slate-600">
-              The nipple–areola complex contains epidermis, superficial duct
-              openings, lactiferous ducts/sinuses, and smooth muscle-rich
-              stroma. The lesion's compartment and relationship to normal
-              structures often narrow the differential before
-              immunohistochemistry is performed.
-            </p>
-            <div className="mt-6 space-y-3">
-              {steps.map((step, index) => (
-                <div key={step.number}>
-                  <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-                    <div className="flex gap-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-900 font-bold text-white">
-                        {step.number}
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold">{step.title}</h3>
-                        <p className="mt-2 leading-7 text-slate-600">
-                          {step.detail}
-                        </p>
-                      </div>
-                    </div>
-                  </article>
-                  {index < steps.length - 1 && (
-                    <div
-                      className="flex justify-center py-2"
-                      aria-hidden="true"
-                    >
-                      <div className="h-5 w-px bg-slate-300" />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <article className="rounded-2xl border border-rose-200 bg-rose-50 p-5">
-                <p className="text-xs font-bold uppercase tracking-wider text-rose-800">
-                  Do not miss
-                </p>
-                <h3 className="mt-2 text-lg font-semibold text-rose-950">
-                  Mammary Paget disease
-                </h3>
-                <p className="mt-2 leading-7 text-rose-950">
-                  A malignant intraepidermal glandular proliferation. The
-                  absence of a palpable mass does not exclude underlying DCIS or
-                  invasive carcinoma.
-                </p>
-              </article>
-              <article className="rounded-2xl border border-blue-200 bg-blue-50 p-5">
-                <p className="text-xs font-bold uppercase tracking-wider text-blue-800">
-                  Key benign mimic
-                </p>
-                <h3 className="mt-2 text-lg font-semibold text-blue-950">
-                  Nipple adenoma
-                </h3>
-                <p className="mt-2 leading-7 text-blue-950">
-                  Can cause erosion, bleeding, and crusting that clinically
-                  mimic Paget disease. Look for a benign ductal/tubular
-                  proliferation with preserved myoepithelial cells.
-                </p>
-              </article>
-            </div>
-          </section>
           <section id="comparison" className="scroll-mt-6">
             <h2 className="text-2xl font-bold sm:text-3xl">
               Histology: rapid differential table
@@ -440,9 +352,6 @@ export default function NippleLesionsPage() {
           <div className="sticky top-6 rounded-2xl border border-slate-200 bg-white p-5">
             <h2 className="font-bold">On this page</h2>
             <nav className="mt-4 flex flex-col gap-3 text-sm text-slate-600">
-              <a href="#gps" className="hover:text-blue-700">
-                Diagnostic GPS
-              </a>
               <a href="#comparison" className="hover:text-blue-700">
                 Differential table
               </a>

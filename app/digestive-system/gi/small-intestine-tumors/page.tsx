@@ -442,74 +442,12 @@ export default function SmallIntestineTumorsPage() {
           <div className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
             PathologyGPS / Gastrointestinal Pathology / Small Intestine
           </div>
-          <div className="grid gap-8 lg:grid-cols-[1.4fr_.6fr] lg:items-end">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
-                Small Intestinal Tumors
-              </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-                A morphology-first diagnostic reference for duodenal, ampullary,
-                jejunal, and ileal epithelial neoplasms, emphasizing essential
-                criteria, targeted immunohistochemistry, and diagnostically
-                useful molecular findings.
-              </p>
-            </div>
-            <div className="rounded-2xl bg-slate-900 p-5 text-white">
-              <div className="text-xs font-semibold uppercase tracking-widest text-teal-300">
-                Core rule
-              </div>
-              <p className="mt-2 text-xl font-semibold leading-7">
-                Establish the anatomic epicenter before assigning the primary
-                site.
-              </p>
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                The ampulla, adjacent pancreas, distal bile duct, and duodenal
-                mucosa are closely related. Gross mapping and
-                clinical-radiologic correlation are essential.
-              </p>
-            </div>
-          </div>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
+            Small Intestinal Tumors
+          </h1>
         </div>
       </header>
       <div className="mx-auto max-w-7xl space-y-8 px-5 py-8">
-        <Panel title="Diagnostic GPS: site first, then phenotype">
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-            {[
-              [
-                "Map the site",
-                "Duodenum outside the ampulla, ampullary surface, intra-ampullary channel, jejunum, or ileum.",
-              ],
-              [
-                "Establish behavior",
-                "Separate non-invasive dysplasia/adenoma from unequivocal infiltrative invasion.",
-              ],
-              [
-                "Recognize the pattern",
-                "Intestinal, gastric/pyloric, pancreatobiliary, mucinous, poorly cohesive, medullary, or undifferentiated.",
-              ],
-              [
-                "Use targeted ancillary tests",
-                "MMR/MSI for hereditary assessment and immunotherapy; phenotype-directed IHC; selected sequencing for actionable alterations.",
-              ],
-              [
-                "Exclude secondary involvement",
-                "Consider direct extension from pancreas/bile duct and metastasis, especially colorectal carcinoma.",
-              ],
-            ].map((x, i) => (
-              <div
-                key={i}
-                className="rounded-xl border border-slate-200 bg-slate-50 p-4"
-              >
-                <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-full bg-teal-700 text-xs font-bold text-white">
-                  {i + 1}
-                </div>
-                <h4 className="font-bold text-slate-900">{x[0]}</h4>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{x[1]}</p>
-              </div>
-            ))}
-          </div>
-        </Panel>
-
         <section className="space-y-4">
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>

@@ -453,69 +453,12 @@ export default function GallbladderBileDuctTumorsPage() {
             PathologyGPS / Gastrointestinal & Hepatobiliary / Gallbladder &
             Extrahepatic Bile Ducts
           </div>
-          <div className="grid gap-8 lg:grid-cols-[1.4fr_.6fr] lg:items-end">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
-                Gallbladder & Extrahepatic Bile Duct Tumors
-              </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-                A morphology-first diagnostic reference for biliary epithelial
-                precursors, intraductal neoplasms, and invasive carcinomas.
-              </p>
-            </div>
-            <div className="rounded-2xl bg-slate-900 p-5 text-white">
-              <div className="text-xs font-semibold uppercase tracking-widest text-teal-300">
-                Core rule
-              </div>
-              <p className="mt-2 text-xl font-semibold leading-7">
-                Separate intraductal growth from destructive stromal invasion.
-              </p>
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                Rokitansky–Aschoff sinus involvement and high-grade cytology
-                alone do not establish invasion.
-              </p>
-            </div>
-          </div>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
+            Gallbladder & Extrahepatic Bile Duct Tumors
+          </h1>
         </div>
       </header>
       <div className="mx-auto max-w-7xl space-y-8 px-5 py-8">
-        <Panel title="Diagnostic GPS: from site and architecture to classification">
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-            {[
-              [
-                "Establish the site",
-                "Gallbladder versus extrahepatic duct; perihilar versus distal bile duct.",
-              ],
-              [
-                "Determine the growth pattern",
-                "Microscopic flat BilIN; gross intraductal papillary/tubular lesion; gallbladder mass; infiltrative ductal stricture.",
-              ],
-              [
-                "Assess invasion",
-                "Look for destructive infiltration, desmoplasia, irregular glands, isolated tumor cells, lymphovascular and perineural invasion.",
-              ],
-              [
-                "Use targeted IHC",
-                "Mucin phenotype for IPNB; MUC5AC/MUC6 and HepPar1/KIT for IOPN; MUC6 and β-catenin for ICTN; selective p53/SMAD4.",
-              ],
-              [
-                "Select molecular tests for purpose",
-                "HER2 and MMR for therapeutic assessment; selected fusion testing for IOPN; interpret KRAS/GNAS in context.",
-              ],
-            ].map((x, i) => (
-              <div
-                key={i}
-                className="rounded-xl border border-slate-200 bg-slate-50 p-4"
-              >
-                <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-full bg-teal-700 text-xs font-bold text-white">
-                  {i + 1}
-                </div>
-                <h4 className="font-bold text-slate-900">{x[0]}</h4>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{x[1]}</p>
-              </div>
-            ))}
-          </div>
-        </Panel>
         <div className="grid gap-5 lg:grid-cols-2">
           <Panel title="Precursor lesion classification">
             <div className="overflow-x-auto">

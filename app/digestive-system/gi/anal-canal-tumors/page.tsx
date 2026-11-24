@@ -433,75 +433,13 @@ export default function AnalCanalTumorsPage() {
           <div className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
             PathologyGPS / GI & Liver / Anal Canal Tumors
           </div>
-          <div className="grid gap-8 lg:grid-cols-[1.4fr_.6fr] lg:items-end">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
-                Anal Canal Tumors
-              </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-                A morphology-first reference to anal squamous precursors,
-                invasive epithelial malignancies, and common tumor-like lesions.
-              </p>
-            </div>
-            <div className="rounded-2xl bg-slate-900 p-5 text-white">
-              <div className="text-xs font-semibold uppercase tracking-widest text-teal-300">
-                Core diagnostic principle
-              </div>
-              <p className="mt-2 text-xl font-semibold leading-7">
-                Establish the anatomic site and epithelial lineage before
-                assigning the tumor type.
-              </p>
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                The anal canal contains colorectal-type, transitional, and
-                squamous epithelium. The dentate line and anal transformation
-                zone are important diagnostic landmarks.
-              </p>
-            </div>
-          </div>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
+            Anal Canal Tumors
+          </h1>
         </div>
       </header>
 
       <div className="mx-auto max-w-7xl space-y-8 px-5 py-8">
-        <Panel title="Diagnostic GPS: anatomic site to classification">
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-            {[
-              [
-                "Define the location",
-                "Distinguish anal canal, anal verge, perianal skin, and ischiorectal region; document the relationship to the dentate line.",
-              ],
-              [
-                "Identify the epithelial zone",
-                "Upper colorectal-type columnar mucosa, middle anal transformation zone, or lower nonkeratinizing squamous mucosa.",
-              ],
-              [
-                "Establish lineage",
-                "Squamous, glandular, melanocytic, neuroendocrine, or a benign/reactive tumor-like process.",
-              ],
-              [
-                "Assess invasion",
-                "Separate intraepithelial SIL from invasive SCC or adenocarcinoma; assess pushing versus destructive growth in verrucous lesions.",
-              ],
-              [
-                "Use targeted ancillary tests",
-                "p16/HPV for SIL and selected SCC; CK7, CK20, CDX2, MUC5AC, p63/CK5/6, and HPV studies for selected adenocarcinomas.",
-              ],
-            ].map((step, i) => (
-              <div
-                key={i}
-                className="rounded-xl border border-slate-200 bg-slate-50 p-4"
-              >
-                <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-full bg-teal-700 text-xs font-bold text-white">
-                  {i + 1}
-                </div>
-                <h4 className="font-bold text-slate-900">{step[0]}</h4>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
-                  {step[1]}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Panel>
-
         <div className="grid gap-5 lg:grid-cols-2">
           <Panel title="Anatomic landmarks with diagnostic impact">
             <div className="space-y-3 text-sm leading-6 text-slate-700">

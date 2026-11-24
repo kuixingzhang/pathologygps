@@ -157,23 +157,8 @@ export default function BreastPapillaryLesionsPage() {
               <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
                 Breast Papillary Lesions
               </h1>
-              <p className="mt-4 text-lg leading-8 text-slate-600">
-                A morphology-first diagnostic guide focused on histology,
-                myoepithelial distribution, targeted immunohistochemistry, and
-                the practical differential diagnosis.
-              </p>
-              <p className="mt-3 text-sm text-amber-800">
-                Educational reference prototype · Requires expert review before
-                clinical deployment
-              </p>
             </div>
             <nav className="mt-6 flex flex-wrap gap-2 text-sm">
-              <a
-                href="#gps"
-                className="rounded-full bg-blue-700 px-4 py-2 font-semibold text-white"
-              >
-                Diagnostic GPS
-              </a>
               <a
                 href="#histology"
                 className="rounded-full border border-slate-300 px-4 py-2 hover:border-blue-400"
@@ -204,95 +189,6 @@ export default function BreastPapillaryLesionsPage() {
 
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-8 sm:px-8 lg:grid-cols-[minmax(0,1fr)_250px]">
           <div className="min-w-0 space-y-12">
-            <section id="gps" className="scroll-mt-6">
-              <div className="max-w-3xl">
-                <h2 className="text-2xl font-bold sm:text-3xl">
-                  Diagnostic GPS
-                </h2>
-                <p className="mt-3 leading-7 text-slate-600">
-                  Start with H&amp;E architecture. Map where myoepithelial cells
-                  are present or absent, then integrate epithelial cytology,
-                  lesion boundaries, and targeted IHC. Myoepithelial status is a
-                  location-dependent observation—not a stand-alone diagnosis.
-                </p>
-              </div>
-
-              <div className="mt-6 space-y-3">
-                {diagnosticSteps.map((step, index) => (
-                  <div key={step.number}>
-                    <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-                      <div className="flex gap-4">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-900 font-bold text-white">
-                          {step.number}
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-semibold">
-                            {step.title}
-                          </h3>
-                          <p className="mt-2 leading-7 text-slate-600">
-                            {step.detail}
-                          </p>
-                        </div>
-                      </div>
-                    </article>
-                    {index < diagnosticSteps.length - 1 && (
-                      <div
-                        className="flex justify-center py-2"
-                        aria-hidden="true"
-                      >
-                        <div className="h-5 w-px bg-slate-300" />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-6 grid gap-4 md:grid-cols-2">
-                <article className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
-                  <p className="text-xs font-bold uppercase tracking-wider text-emerald-800">
-                    Branch A · Myoepithelium on cores
-                  </p>
-                  <h3 className="mt-2 text-lg font-semibold text-emerald-950">
-                    Consider papilloma
-                  </h3>
-                  <p className="mt-2 leading-7 text-emerald-950">
-                    Assess whether the epithelial proliferation is benign,
-                    atypical, or DCIS. For low-grade atypia in a papilloma, use
-                    extent (
-                    <span className="font-semibold">&lt; 3 mm vs ≥ 3 mm</span>)
-                    alongside grade and morphology.
-                  </p>
-                </article>
-                <article className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
-                  <p className="text-xs font-bold uppercase tracking-wider text-amber-800">
-                    Branch B · Myoepithelium absent on cores
-                  </p>
-                  <h3 className="mt-2 text-lg font-semibold text-amber-950">
-                    Classify architecture and boundary
-                  </h3>
-                  <p className="mt-2 leading-7 text-amber-950">
-                    Consider papillary DCIS, EPC, SPC, or invasive papillary
-                    carcinoma in the appropriate morphologic setting. Assess the
-                    peripheral layer and seek unequivocal invasion before
-                    diagnosing an invasive component.
-                  </p>
-                </article>
-              </div>
-
-              <div className="mt-4 rounded-2xl border border-blue-200 bg-blue-50 p-5">
-                <h3 className="font-semibold text-blue-950">
-                  When the core biopsy is insufficient
-                </h3>
-                <p className="mt-2 leading-7 text-blue-950">
-                  If fragmentation or limited sampling prevents definitive
-                  classification, a qualified category such as “atypical
-                  papillary lesion” or “at least papillary carcinoma in situ”
-                  may be appropriate, with excision for complete
-                  characterization when indicated.
-                </p>
-              </div>
-            </section>
-
             <section id="histology" className="scroll-mt-6">
               <h2 className="text-2xl font-bold sm:text-3xl">
                 Histology: rapid differential table
@@ -461,9 +357,6 @@ export default function BreastPapillaryLesionsPage() {
             <div className="sticky top-6 rounded-2xl border border-slate-200 bg-white p-5">
               <h2 className="font-bold">On this page</h2>
               <nav className="mt-4 flex flex-col gap-3 text-sm text-slate-600">
-                <a href="#gps" className="hover:text-blue-700">
-                  Diagnostic GPS
-                </a>
                 <a href="#histology" className="hover:text-blue-700">
                   Histology table
                 </a>

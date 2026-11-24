@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import PathologySearch from "@/components/PathologySearch";
 
 type Differential = { name: string; distinction: string };
 type Entity = {
@@ -1270,59 +1269,15 @@ export default function AdrenalGlandTumorsPage() {
   return (
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-7">
-        <a
-          href="/"
-          className="text-sm font-semibold text-teal-700 hover:underline"
-        >
-          ← Home
-        </a>
         <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-teal-700">
           PathologyGPS · Endocrine Pathology
         </p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
           Adrenal Gland Tumors
         </h1>
-        <p className="mt-3 max-w-4xl text-base leading-7 text-slate-600">
-          A practical diagnostic reference for adrenal cortical lesions,
-          neuroblastic tumors, and adrenal and extra-adrenal paraganglial
-          neoplasms, emphasizing lineage confirmation and criteria for
-          malignancy.
-        </p>
-        <div className="mt-5">
-          <PathologySearch />
-        </div>
       </div>
 
-      <section className="mb-8 grid gap-4 lg:grid-cols-2">
-        <div className="rounded-xl border border-slate-200 bg-white p-4">
-          <h2 className="font-bold text-slate-900">
-            Core Diagnostic Principles
-          </h2>
-          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-slate-700">
-            <li>
-              Confirm adrenal cortical lineage with SF1 in nonfunctioning
-              adrenal neoplasms when the origin is uncertain.
-            </li>
-            <li>
-              Use CYP11B2 immunohistochemistry to identify aldosterone-producing
-              micronodules and nodules in primary aldosteronism.
-            </li>
-            <li>
-              Apply variant-appropriate criteria: Weiss for conventional
-              cortical tumors, Lin–Weiss–Bisceglia for pure oncocytic tumors,
-              and Wieneke for pediatric cortical tumors.
-            </li>
-            <li>
-              Record mitotic count and Ki-67 index in every adrenocortical
-              carcinoma.
-            </li>
-            <li>
-              Do not infer benign behavior in pheochromocytoma or paraganglioma
-              from bland morphology; metastatic disease defines malignant
-              behavior.
-            </li>
-          </ul>
-        </div>
+      <section className="mb-8">
         <div className="rounded-xl border border-slate-200 bg-white p-4">
           <h2 className="font-bold text-slate-900">
             High-Yield Diagnostic Separation
@@ -1362,46 +1317,20 @@ export default function AdrenalGlandTumorsPage() {
         </div>
       </section>
 
-      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end">
-        <div className="flex-1">
-          <label
-            htmlFor="adrenal-search"
-            className="mb-1 block text-sm font-semibold text-slate-700"
-          >
-            Search diagnoses and diagnostic criteria
-          </label>
-          <input
-            id="adrenal-search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search: SF1, CYP11B2, Weiss score, MYCN, SDHB..."
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100"
-          />
-        </div>
-        <div className="sm:w-64">
-          <label
-            htmlFor="adrenal-group"
-            className="mb-1 block text-sm font-semibold text-slate-700"
-          >
-            Category
-          </label>
-          <select
-            id="adrenal-group"
-            value={group}
-            onChange={(e) => setGroup(e.target.value)}
-            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
-          >
-            {groups.map((g) => (
-              <option key={g}>{g}</option>
-            ))}
-          </select>
-        </div>
-        <button
-          onClick={() => setOpen(allOpen ? [] : filtered.map((e) => e.name))}
-          className="rounded-lg border border-teal-700 px-4 py-2 text-sm font-semibold text-teal-800 hover:bg-teal-50"
+      <div className="mb-6">
+        <label
+          htmlFor="adrenal-search"
+          className="mb-1 block text-sm font-semibold text-slate-700"
         >
-          {allOpen ? "Collapse All" : "Expand All"}
-        </button>
+          Search diagnoses and diagnostic criteria
+        </label>
+        <input
+          id="adrenal-search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search: SF1, CYP11B2, Weiss score, MYCN, SDHB..."
+          className="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100"
+        />
       </div>
 
       <div className="mb-3 flex items-center justify-between text-xs text-slate-500">

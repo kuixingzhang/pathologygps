@@ -45,14 +45,6 @@ export default function BreastDirectoryPage() {
               href: "/breast/fibroepithelial-lesions",
             },
             { title: "Mesenchymal Tumors", href: "/breast/mesenchymal" },
-            {
-              title: "Spindle Cell Lesions",
-              href: "/breast/mesenchymal/spindle-cell-lesions",
-            },
-            {
-              title: "Vascular Tumors",
-              href: "/breast/mesenchymal/vascular-tumors",
-            },
           ],
         },
         {

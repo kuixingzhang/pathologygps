@@ -379,71 +379,12 @@ export default function AppendicealTumorsPage() {
           <div className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
             PathologyGPS / GI & Liver / Appendiceal Tumors
           </div>
-          <div className="grid gap-8 lg:grid-cols-[1.4fr_.6fr] lg:items-end">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
-                Appendiceal Tumors
-              </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-                A morphology-first reference emphasizing the distinction between
-                epithelial precursors, non-invasive mucinous neoplasms,
-                infiltrative adenocarcinoma, and goblet cell adenocarcinoma.
-              </p>
-            </div>
-            <div className="rounded-2xl bg-slate-900 p-5 text-white">
-              <div className="text-xs font-semibold uppercase tracking-widest text-teal-300">
-                Core diagnostic rule
-              </div>
-              <p className="mt-2 text-xl font-semibold leading-7">
-                In appendiceal mucinous lesions, the pattern of wall involvement
-                and invasion is decisive.
-              </p>
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                Distinguish intact mucosa, pushing/diverticulum-like growth, and
-                destructive infiltrative invasion; assess the entire appendix.
-              </p>
-            </div>
-          </div>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
+            Appendiceal Tumors
+          </h1>
         </div>
       </header>
       <div className="mx-auto max-w-7xl space-y-8 px-5 py-8">
-        <Panel title="Diagnostic GPS: classify the appendiceal epithelial lesion">
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-            {[
-              [
-                "Establish the epicenter",
-                "Appendix proper versus cecal adenoma extending into the appendiceal orifice; note distal versus proximal involvement.",
-              ],
-              [
-                "Assess the mucosal pattern",
-                "Serrated crypts, conventional intestinal dysplasia, or mucin-rich columnar epithelium.",
-              ],
-              [
-                "Evaluate the wall",
-                "Is the muscularis mucosae intact? Look for fibrosis, hyalinization, loss of tissue planes, mural mucin, and pushing growth.",
-              ],
-              [
-                "Determine the invasion pattern",
-                "Broad pushing/diverticulum-like growth favors LAMN/HAMN; destructive infiltrative glands with desmoplasia favor adenocarcinoma.",
-              ],
-              [
-                "Recognize goblet cell phenotype",
-                "Intimately admixed goblet-like mucinous, neuroendocrine, and Paneth-like differentiation supports GCA.",
-              ],
-            ].map((x, i) => (
-              <div
-                key={i}
-                className="rounded-xl border border-slate-200 bg-slate-50 p-4"
-              >
-                <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-full bg-teal-700 text-xs font-bold text-white">
-                  {i + 1}
-                </div>
-                <h4 className="font-bold text-slate-900">{x[0]}</h4>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{x[1]}</p>
-              </div>
-            ))}
-          </div>
-        </Panel>
         <div className="grid gap-5 lg:grid-cols-2">
           <Panel title="The critical distinction: mucinous adenoma, LAMN/HAMN, and mucinous adenocarcinoma">
             <div className="overflow-x-auto">

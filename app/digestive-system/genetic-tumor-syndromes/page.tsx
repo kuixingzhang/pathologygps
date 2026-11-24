@@ -566,31 +566,9 @@ export default function GeneticTumorSyndromesPage() {
           <div className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
             PathologyGPS / GI & Liver / Genetic Tumor Syndromes
           </div>
-          <div className="grid gap-8 lg:grid-cols-[1.4fr_.6fr] lg:items-end">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
-                GI Genetic Tumor Syndromes
-              </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-                A clinicopathologic reference linking inherited predisposition,
-                gastrointestinal manifestations, diagnostic morphology,
-                immunophenotype, and germline testing.
-              </p>
-            </div>
-            <div className="rounded-2xl bg-slate-900 p-5 text-white">
-              <div className="text-xs font-semibold uppercase tracking-widest text-teal-300">
-                Core principle
-              </div>
-              <p className="mt-2 text-xl font-semibold leading-7">
-                Recognize the phenotype. Confirm the inherited mechanism.
-              </p>
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                A tumor phenotype or abnormal IHC result may trigger genetic
-                evaluation, but germline testing establishes most hereditary
-                syndromes.
-              </p>
-            </div>
-          </div>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
+            GI Genetic Tumor Syndromes
+          </h1>
         </div>
       </header>
       <div className="mx-auto max-w-7xl space-y-8 px-5 py-8">
@@ -623,43 +601,6 @@ export default function GeneticTumorSyndromesPage() {
                 ))}
               </tbody>
             </table>
-          </div>
-        </Panel>
-        <Panel title="Practical diagnostic workflow">
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-            {[
-              [
-                "1. Recognize the pattern",
-                "Age, multiplicity, polyp type, tumor location, family history, and extra-GI findings.",
-              ],
-              [
-                "2. Review morphology",
-                "Classify each polyp or tumor independently; do not infer a syndrome from nonspecific histology.",
-              ],
-              [
-                "3. Apply targeted IHC",
-                "MMR proteins for suspected Lynch/CMMRD; SDHB (± SDHA) for suspected SDH-deficient neoplasia; other stains only when indicated.",
-              ],
-              [
-                "4. Confirm the mechanism",
-                "Use germline testing and appropriate copy-number, promoter, or structural-variant analysis.",
-              ],
-              [
-                "5. Communicate implications",
-                "Recommend genetics referral and family assessment when a hereditary syndrome is suspected or confirmed.",
-              ],
-            ].map((x, i) => (
-              <div
-                key={i}
-                className="rounded-xl border border-slate-200 bg-slate-50 p-4"
-              >
-                <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-full bg-teal-700 text-xs font-bold text-white">
-                  {i + 1}
-                </div>
-                <h3 className="font-bold text-slate-900">{x[0]}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{x[1]}</p>
-              </div>
-            ))}
           </div>
         </Panel>
         <div className="grid gap-5 lg:grid-cols-2">

@@ -239,34 +239,10 @@ export default function CommonInvasiveCarcinomaPage() {
             <span className="text-slate-300">/</span>
             <span>Breast pathology</span>
           </div>
-          <div className="mt-4 grid gap-6 lg:grid-cols-[1fr_280px] lg:items-end">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
-                Common Invasive Breast Carcinomas
-              </h1>
-              <p className="mt-3 max-w-3xl text-base leading-7 text-slate-600">
-                A morphology-first diagnostic guide to invasive carcinoma of no
-                special type, microinvasion, lobular carcinoma, and common
-                special histological types—with practical grading, biomarker,
-                staging, and sign-out checkpoints.
-              </p>
-            </div>
-            <div className="rounded-xl bg-slate-950 p-4 text-white">
-              <p className="text-xs font-semibold uppercase tracking-wider text-teal-300">
-                Diagnostic GPS
-              </p>
-              <p className="mt-2 text-sm leading-6 text-slate-200">
-                Confirm invasion → classify morphology → grade → assess LVI and
-                extent → verify biomarkers → complete structured reporting.
-              </p>
-            </div>
-          </div>
-          <div className="mt-5 flex flex-wrap gap-2">
-            <Tag>H&E-first</Tag>
-            <Tag>IHC when indicated</Tag>
-            <Tag>ER / PR / HER2</Tag>
-            <Tag>Nottingham grade</Tag>
-            <Tag>pTNM essentials</Tag>
+          <div className="mt-4">
+            <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
+              Common Invasive Breast Carcinomas
+            </h1>
           </div>
         </div>
       </div>

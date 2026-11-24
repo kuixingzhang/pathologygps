@@ -192,100 +192,17 @@ export default function BreastFibroepithelialLesionsPage() {
             <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
               Breast Fibroepithelial Lesions
             </h1>
-            <p className="mt-4 text-lg leading-8 text-slate-600">
-              A morphology-first guide to hamartoma, fibroadenoma variants, and
-              phyllodes tumor, emphasizing architecture, stromal features,
-              grading, and core-biopsy limitations.
-            </p>
-            <p className="mt-3 text-sm text-amber-800">
-              Diagnostic reference · Interpret in conjunction with the complete
-              specimen and clinical context
-            </p>
           </div>
-          <nav className="mt-6 flex flex-wrap gap-2 text-sm">
-            <a
-              href="#gps"
-              className="rounded-full bg-blue-700 px-4 py-2 font-semibold text-white"
-            >
-              Diagnostic GPS
-            </a>
-            <a
-              href="#histology"
-              className="rounded-full border border-slate-300 px-4 py-2 hover:border-blue-400"
-            >
-              Histology table
-            </a>
-            <a
-              href="#grading"
-              className="rounded-full border border-slate-300 px-4 py-2 hover:border-blue-400"
-            >
-              Phyllodes grading
-            </a>
-            <a
-              href="#ihc"
-              className="rounded-full border border-slate-300 px-4 py-2 hover:border-blue-400"
-            >
-              IHC & molecular
-            </a>
-            <a
-              href="#pitfalls"
-              className="rounded-full border border-slate-300 px-4 py-2 hover:border-blue-400"
-            >
-              Pitfalls
-            </a>
-            <a
-              href="#core-biopsy"
-              className="rounded-full border border-slate-300 px-4 py-2 hover:border-blue-400"
-            >
-              Core biopsy
-            </a>
-          </nav>
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-7xl gap-8 px-5 py-8 sm:px-8 lg:grid-cols-[minmax(0,1fr)_250px]">
+      <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8">
         <div className="min-w-0 space-y-12">
-          <section id="gps" className="scroll-mt-6">
-            <div className="max-w-3xl">
-              <h2 className="text-2xl font-bold sm:text-3xl">Diagnostic GPS</h2>
-              <p className="mt-3 leading-7 text-slate-600">
-                Start with the biphasic pattern, then decide whether the
-                architecture is fibroadenoma-like, phyllodes-like, or a
-                disorganized collection of normal breast components. For
-                suspected phyllodes tumor, grade the stromal component using the
-                full set of histological parameters rather than one isolated
-                finding.
-              </p>
-            </div>
-            <div className="mt-6 space-y-3">
-              {diagnosticSteps.map((step, index) => (
-                <div key={step.number}>
-                  <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-                    <div className="flex gap-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-900 font-bold text-white">
-                        {step.number}
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold">{step.title}</h3>
-                        <p className="mt-2 leading-7 text-slate-600">
-                          {step.detail}
-                        </p>
-                      </div>
-                    </div>
-                  </article>
-                  {index < diagnosticSteps.length - 1 && (
-                    <div
-                      className="flex justify-center py-2"
-                      aria-hidden="true"
-                    >
-                      <div className="h-5 w-px bg-slate-300" />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <section
+            aria-label="Diagnostic pattern branches"
+            className="space-y-4"
+          >
+            <div className="grid gap-4 md:grid-cols-3">
               <article className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
                 <p className="text-xs font-bold uppercase tracking-wider text-emerald-800">
                   Branch A
@@ -326,7 +243,7 @@ export default function BreastFibroepithelialLesionsPage() {
                 </p>
               </article>
             </div>
-            <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-5">
+            <div className="rounded-2xl border border-slate-200 bg-white p-5">
               <h3 className="font-semibold">Biological principle</h3>
               <p className="mt-2 leading-7 text-slate-600">
                 In fibroepithelial tumors, neoplastic progression usually
@@ -578,59 +495,6 @@ export default function BreastFibroepithelialLesionsPage() {
             </ul>
           </section>
         </div>
-
-        <aside className="space-y-5">
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <h2 className="font-semibold">On this page</h2>
-            <nav className="mt-3 space-y-2 text-sm text-slate-600">
-              <a className="block hover:text-blue-700" href="#gps">
-                Diagnostic GPS
-              </a>
-              <a className="block hover:text-blue-700" href="#histology">
-                Histology table
-              </a>
-              <a className="block hover:text-blue-700" href="#grading">
-                Phyllodes grading
-              </a>
-              <a className="block hover:text-blue-700" href="#ihc">
-                IHC & molecular
-              </a>
-              <a className="block hover:text-blue-700" href="#core-biopsy">
-                Core biopsy
-              </a>
-              <a className="block hover:text-blue-700" href="#pitfalls">
-                Pitfalls
-              </a>
-            </nav>
-          </div>
-          <div className="rounded-2xl border border-blue-200 bg-blue-50 p-5">
-            <h2 className="font-semibold text-blue-950">
-              Core diagnostic principle
-            </h2>
-            <p className="mt-2 text-sm leading-6 text-blue-950">
-              The stromal component drives grading in phyllodes tumor.
-              Architecture and the combined stromal criteria matter more than
-              any single feature or ancillary stain.
-            </p>
-          </div>
-          <div className="rounded-2xl border border-slate-200 bg-white p-5">
-            <h2 className="font-semibold">Related page</h2>
-            <Link
-              href="/breast/epithelial/papillary-lesions"
-              className="mt-2 block text-sm font-medium text-blue-700 hover:underline"
-            >
-              Breast Papillary Lesions →
-            </Link>
-          </div>
-          <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
-            <h2 className="font-semibold text-amber-950">Use note</h2>
-            <p className="mt-2 text-sm leading-6 text-amber-950">
-              Educational decision support only. Review morphology, imaging,
-              sampling adequacy, and current local guidance before final
-              sign-out.
-            </p>
-          </div>
-        </aside>
       </div>
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-7xl px-5 py-6 text-sm text-slate-500 sm:px-8">

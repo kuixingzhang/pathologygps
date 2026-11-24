@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import PathologySearch from "@/components/PathologySearch";
 
 type Differential = { name: string; distinction: string };
 type Entity = {
@@ -394,19 +393,10 @@ function Section({
 
 export default function ParathyroidTumorsPage() {
   const [query, setQuery] = useState("");
-  const [group, setGroup] = useState("All Categories");
   const [open, setOpen] = useState<string[]>([]);
-  const groups = useMemo(
-    () => [
-      "All Categories",
-      ...Array.from(new Set(entities.map((e) => e.group))),
-    ],
-    [],
-  );
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return entities.filter((e) => {
-      const groupMatch = group === "All Categories" || e.group === group;
       const text = [
         e.name,
         e.group,
@@ -422,11 +412,9 @@ export default function ParathyroidTumorsPage() {
       ]
         .join(" ")
         .toLowerCase();
-      return groupMatch && (!q || text.includes(q));
+      return !q || text.includes(q);
     });
-  }, [query, group]);
-  const allOpen =
-    filtered.length > 0 && filtered.every((e) => open.includes(e.name));
+  }, [query]);
   const toggle = (name: string) =>
     setOpen((current) =>
       current.includes(name)
@@ -437,61 +425,15 @@ export default function ParathyroidTumorsPage() {
   return (
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-7">
-        <a
-          href="/"
-          className="text-sm font-semibold text-teal-700 hover:underline"
-        >
-          ← Home
-        </a>
         <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-teal-700">
           PathologyGPS · Endocrine Pathology
         </p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
           Parathyroid Tumors
         </h1>
-        <p className="mt-3 max-w-4xl text-base leading-7 text-slate-600">
-          A practical diagnostic reference emphasizing the distinction between
-          multiglandular hyperplasia, benign parathyroid neoplasms, tumors of
-          uncertain malignant potential, and carcinoma.
-        </p>
-        <div className="mt-5">
-          <PathologySearch />
-        </div>
       </div>
 
-      <section className="mb-8 grid gap-4 lg:grid-cols-2">
-        <div className="rounded-xl border border-slate-200 bg-white p-4">
-          <h2 className="font-bold text-slate-900">
-            Core Diagnostic Principles
-          </h2>
-          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-slate-700">
-            <li>
-              Interpret the specimen with serum calcium, PTH, renal function,
-              imaging, operative findings, and the status of other parathyroid
-              glands.
-            </li>
-            <li>
-              Section through the vascular hilum when evaluating a suspected
-              adenoma to identify a rim of suppressed non-neoplastic parathyroid
-              tissue.
-            </li>
-            <li>
-              Hyperplasia is fundamentally a multiglandular diagnosis;
-              MEN-associated multiglandular disease is generally classified as
-              multiple adenomas.
-            </li>
-            <li>
-              Parathyroid carcinoma requires unequivocal invasion or metastasis.
-              Cytological atypia, fibrosis, adherence, tumor size, and
-              proliferation alone are insufficient.
-            </li>
-            <li>
-              Parafibromin immunohistochemistry is particularly useful in
-              atypical tumors and carcinomas and should prompt consideration of
-              germline CDC73 testing when deficient.
-            </li>
-          </ul>
-        </div>
+      <section className="mb-8">
         <div className="rounded-xl border border-slate-200 bg-white p-4">
           <h2 className="font-bold text-slate-900">
             High-Yield Diagnostic Separation
@@ -531,46 +473,20 @@ export default function ParathyroidTumorsPage() {
         </div>
       </section>
 
-      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end">
-        <div className="flex-1">
-          <label
-            htmlFor="parathyroid-search"
-            className="mb-1 block text-sm font-semibold text-slate-700"
-          >
-            Search diagnoses and diagnostic criteria
-          </label>
-          <input
-            id="parathyroid-search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search: parafibromin, vascular invasion, lipoadenoma, hyperplasia..."
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100"
-          />
-        </div>
-        <div className="sm:w-64">
-          <label
-            htmlFor="parathyroid-group"
-            className="mb-1 block text-sm font-semibold text-slate-700"
-          >
-            Category
-          </label>
-          <select
-            id="parathyroid-group"
-            value={group}
-            onChange={(e) => setGroup(e.target.value)}
-            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
-          >
-            {groups.map((g) => (
-              <option key={g}>{g}</option>
-            ))}
-          </select>
-        </div>
-        <button
-          onClick={() => setOpen(allOpen ? [] : filtered.map((e) => e.name))}
-          className="rounded-lg border border-teal-700 px-4 py-2 text-sm font-semibold text-teal-800 hover:bg-teal-50"
+      <div className="mb-6">
+        <label
+          htmlFor="parathyroid-search"
+          className="mb-1 block text-sm font-semibold text-slate-700"
         >
-          {allOpen ? "Collapse All" : "Expand All"}
-        </button>
+          Search diagnoses and diagnostic criteria
+        </label>
+        <input
+          id="parathyroid-search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search: parafibromin, vascular invasion, lipoadenoma, hyperplasia..."
+          className="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100"
+        />
       </div>
 
       <div className="mb-3 flex items-center justify-between text-xs text-slate-500">

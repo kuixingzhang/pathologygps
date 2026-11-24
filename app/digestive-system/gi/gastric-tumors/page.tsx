@@ -572,75 +572,15 @@ export default function GastricTumorsPage() {
           <div className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
             PathologyGPS / Gastrointestinal Pathology / Gastric Tumors
           </div>
-          <div className="grid gap-8 lg:grid-cols-[1.4fr_.6fr] lg:items-end">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
-                Gastric Tumors and Precursor Lesions
-              </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-                A morphology-first reference for gastric epithelial lesions,
-                emphasizing essential diagnostic criteria, targeted ancillary
-                studies, and practical differential diagnosis.
-              </p>
-            </div>
-            <div className="rounded-2xl bg-slate-900 p-5 text-white">
-              <div className="text-xs font-semibold uppercase tracking-widest text-teal-300">
-                Core rule
-              </div>
-              <p className="mt-2 text-xl font-semibold leading-7">
-                Establish invasion, identify differentiation, and interpret the
-                background mucosa.
-              </p>
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                Separate non-invasive dysplasia from intramucosal carcinoma; do
-                not mistake oxyntic gland prolapse for submucosal invasion.
-              </p>
-            </div>
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
+              Gastric Tumors and Precursor Lesions
+            </h1>
           </div>
         </div>
       </header>
 
       <div className="mx-auto max-w-7xl space-y-8 px-5 py-8">
-        <Panel title="Diagnostic GPS: from gastric mucosa to classification">
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-            {[
-              [
-                "Establish the background",
-                "Assess H. pylori-associated or autoimmune gastritis, atrophy, intestinal metaplasia, prior surgery, and polyposis history.",
-              ],
-              [
-                "Identify the lesion type",
-                "Distinguish cystic oxyntic glands, foveolar hyperplasia, intraepithelial neoplasia, pyloric/oxyntic gland neoplasia, and invasive carcinoma.",
-              ],
-              [
-                "Determine invasion",
-                "Look for lamina propria invasion in dysplasia-like lesions and true submucosal invasion in oxyntic gland neoplasms.",
-              ],
-              [
-                "Characterize differentiation",
-                "Assess glandular, poorly cohesive, mucinous, squamous, hepatoid, lymphoid-stroma, or undifferentiated patterns.",
-              ],
-              [
-                "Use targeted ancillary tests",
-                "Select mucin, squamous, neuroendocrine, EBV, MMR, HER2, CLDN18.2, and SWI/SNF studies according to morphology and clinical need.",
-              ],
-            ].map((step, index) => (
-              <div
-                key={index}
-                className="rounded-xl border border-slate-200 bg-slate-50 p-4"
-              >
-                <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-full bg-teal-700 text-xs font-bold text-white">
-                  {index + 1}
-                </div>
-                <h4 className="font-bold text-slate-900">{step[0]}</h4>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
-                  {step[1]}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Panel>
-
         <div className="grid gap-5 lg:grid-cols-2">
           <Panel title="Gastric cancerization field">
             <div className="space-y-3 text-sm leading-6 text-slate-700">

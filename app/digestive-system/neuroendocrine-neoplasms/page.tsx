@@ -1031,74 +1031,13 @@ export default function NeuroendocrineNeoplasmsPage() {
             PathologyGPS / Gastrointestinal & Hepatopancreatobiliary /
             Neuroendocrine Neoplasms
           </div>
-          <div className="grid gap-8 lg:grid-cols-[1.4fr_.6fr] lg:items-end">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
-                Neuroendocrine Neoplasms
-              </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-                A morphology-first reference to digestive-system neuroendocrine
-                neoplasms, emphasizing site-specific clinical context,
-                diagnostic criteria, immunophenotype, and clinically useful
-                molecular findings.
-              </p>
-            </div>
-            <div className="rounded-2xl bg-slate-900 p-5 text-white">
-              <div className="text-xs font-semibold uppercase tracking-widest text-teal-300">
-                Core diagnostic rule
-              </div>
-              <p className="mt-2 text-xl font-semibold leading-7">
-                Classify by morphology first; use immunohistochemistry to
-                confirm lineage.
-              </p>
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                Well-differentiated NET and poorly differentiated NEC are
-                distinct tumor types. Ki-67 grades NET but does not distinguish
-                NET G3 from NEC.
-              </p>
-            </div>
-          </div>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
+            Neuroendocrine Neoplasms
+          </h1>
         </div>
       </header>
 
       <div className="mx-auto max-w-7xl space-y-8 px-5 py-8">
-        <Panel title="Diagnostic GPS: from morphology to classification">
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-            {[
-              [
-                "1. Establish lineage",
-                "Identify epithelial versus non-epithelial (neuronal) NEN. Paraganglioma is typically keratin-negative.",
-              ],
-              [
-                "2. Confirm morphology",
-                "Look for organoid nests/trabeculae and stippled chromatin (NET) versus sheets, marked atypia, molding, apoptosis, and necrosis (NEC).",
-              ],
-              [
-                "3. Confirm neuroendocrine differentiation",
-                "Use at least two of chromogranin A, synaptophysin, and INSM1 in the appropriate morphologic setting.",
-              ],
-              [
-                "4. Grade and classify",
-                "For NET, report Ki-67 and mitotic count. Classify mixed tumors as MiNEN or amphicrine-like carcinoma using architecture and distribution.",
-              ],
-              [
-                "5. Integrate site and context",
-                "Correlate with anatomic site, background mucosa, functional syndrome, syndromic history, imaging, and metastatic workup.",
-              ],
-            ].map((x, i) => (
-              <div
-                key={i}
-                className="rounded-xl border border-slate-200 bg-slate-50 p-4"
-              >
-                <div className="mb-2 text-xs font-bold uppercase tracking-wider text-teal-700">
-                  {x[0]}
-                </div>
-                <p className="text-sm leading-6 text-slate-700">{x[1]}</p>
-              </div>
-            ))}
-          </div>
-        </Panel>
-
         <div className="grid gap-5 lg:grid-cols-2">
           <Panel title="NET versus NEC: the distinction is morphologic">
             <div className="overflow-x-auto">

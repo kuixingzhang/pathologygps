@@ -485,47 +485,7 @@ export default function EyelidTumorsPage() {
         <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
           Eyelid Tumors and Tumor-Like Lesions
         </h1>
-        <p className="mt-3 max-w-4xl text-base leading-7 text-slate-600 dark:text-slate-300">
-          A practical guide to the clinicopathologic features, diagnostic
-          criteria, immunophenotype, and molecular findings of common and
-          distinctive eyelid lesions.
-        </p>
       </header>
-
-      <section className="mb-7 rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-900">
-        <h2 className="text-lg font-semibold">Diagnostic Approach</h2>
-        <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            [
-              "Anatomic compartment",
-              "Determine whether the lesion is epidermal, follicular, sebaceous, sweat gland, melanocytic, or dermal/subcutaneous.",
-            ],
-            [
-              "Growth pattern",
-              "Assess circumscription, symmetry, depth, infiltrative growth, perineural invasion, and pagetoid spread.",
-            ],
-            [
-              "Cytologic features",
-              "Evaluate maturation, atypia, mitotic activity, necrosis, and differentiation.",
-            ],
-            [
-              "Clinical context",
-              "Correlate age, location, recurrence, chronic sun damage, immunosuppression, and possible hereditary syndromes.",
-            ],
-          ].map(([title, body]) => (
-            <div
-              key={title}
-              className="rounded-xl bg-white p-3 dark:bg-slate-800"
-            >
-              <h3 className="font-semibold">{title}</h3>
-              <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">
-                {body}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <section className="mb-6 overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-700">
         <div className="border-b border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-700 dark:bg-slate-900">
           <h2 className="font-semibold">Quick Diagnostic Comparison</h2>
